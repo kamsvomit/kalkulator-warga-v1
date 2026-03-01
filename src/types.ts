@@ -3,6 +3,7 @@ export interface Calculator {
   id: string;
   description: string;
   category: string;
+  icon?: string;
   render: (container: HTMLElement) => void;
 }
 
