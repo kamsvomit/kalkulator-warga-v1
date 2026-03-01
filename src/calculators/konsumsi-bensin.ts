@@ -5,7 +5,7 @@ export const konsumsiBensin: Calculator = {
   id: 'konsumsi-bensin',
   name: 'Konsumsi Bensin',
   description: 'Hitung rata-rata konsumsi bensin kendaraan Anda (km/liter).',
-  category: 'Kendaraan & Bensin',
+  category: 'Utilitas',
   render(container) {
     const { wrapper: dWrap, input: dInput } = createInput('Jarak Tempuh (km)', 'dist', 'number');
     const { wrapper: lWrap, input: lInput } = createInput('Bensin Terpakai (liter)', 'liters', 'number');

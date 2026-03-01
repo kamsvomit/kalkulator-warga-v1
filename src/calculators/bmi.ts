@@ -5,7 +5,7 @@ export const bmi: Calculator = {
   id: 'bmi',
   name: 'BMI (Body Mass Index)',
   description: 'Hitung indeks massa tubuh untuk memantau kesehatan Anda.',
-  category: 'Kesehatan & Waktu',
+  category: 'Kesehatan',
   render(container) {
     const { wrapper: wWrap, input: wInput } = createInput('Berat Badan (kg)', 'weight', 'number');
     const { wrapper: hWrap, input: hInput } = createInput('Tinggi Badan (cm)', 'height', 'number');

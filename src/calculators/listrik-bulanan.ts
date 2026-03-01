@@ -5,7 +5,7 @@ export const listrikBulanan: Calculator = {
   id: 'listrik-bulanan',
   name: 'Biaya Listrik Bulanan',
   description: 'Estimasi tagihan listrik bulanan berdasarkan pemakaian kWh.',
-  category: 'Tagihan Rumah',
+  category: 'Rumah',
   render(container) {
     const { wrapper: kWrap, input: kInput } = createInput('Pemakaian (kWh)', 'kwh', 'number');
     const { wrapper: tWrap, input: tInput } = createInput('Tarif per kWh (Rp)', 'rate', 'number', '1444');

@@ -5,7 +5,7 @@ export const cicilanBulanan: Calculator = {
   id: 'cicilan-bulanan',
   name: 'Cicilan Bulanan',
   description: 'Hitung estimasi cicilan bulanan untuk pinjaman Anda.',
-  category: 'Hutang & Tabungan',
+  category: 'Keuangan',
   render(container) {
     const { wrapper: pWrap, input: pInput } = createInput('Jumlah Pinjaman', 'principal', 'number');
     const { wrapper: rWrap, input: rInput } = createInput('Bunga per Tahun (%)', 'rate', 'number', 'Contoh: 12');

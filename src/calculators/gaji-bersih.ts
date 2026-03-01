@@ -5,7 +5,7 @@ export const gajiBersih: Calculator = {
   id: 'gaji-bersih',
   name: 'Gaji Bersih',
   description: 'Hitung gaji bersih setelah potongan (BPJS, Pajak, dll).',
-  category: 'Gaji & Pendapatan',
+  category: 'Keuangan',
   render(container) {
     const { wrapper: gWrap, input: gInput } = createInput('Gaji Kotor (Gross)', 'gross', 'number');
     const { wrapper: pWrap, input: pInput } = createInput('Total Potongan', 'deductions', 'number', '0');

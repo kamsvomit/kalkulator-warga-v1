@@ -5,7 +5,7 @@ export const targetHp: Calculator = {
   id: 'target-hp',
   name: 'Target Beli HP',
   description: 'Hitung berapa lama Anda harus menabung untuk membeli HP impian.',
-  category: 'Target Keuangan',
+  category: 'Keuangan',
   render(container) {
     const { wrapper: hWrap, input: hInput } = createInput('Harga HP', 'price', 'number');
     const { wrapper: tWrap, input: tInput } = createInput('Tabungan per Bulan', 'save', 'number');
