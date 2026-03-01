@@ -14,15 +14,21 @@ async function init() {
   const app = document.getElementById('app');
   if (!app) return;
 
-  // Load 50 calculators
-  for (let i = 1; i <= 50; i++) {
+  // Modern Vite way to load all calculators in the directory
+  const modules = import.meta.glob('./calculators/*.ts');
+  
+  for (const path in modules) {
     try {
-      const module = await import(`./calculators/calculator${i}.ts`);
-      if (module[`calculator${i}`]) {
-        registerCalculator(module[`calculator${i}`]);
+      const module: any = await (modules[path] as () => Promise<any>)();
+      // Register any object that looks like a Calculator
+      for (const key in module) {
+        const item = module[key];
+        if (item && typeof item === 'object' && item.id && item.render) {
+          registerCalculator(item);
+        }
       }
     } catch (e) {
-      // Skip missing files
+      console.error(`Gagal memuat kalkulator: ${path}`, e);
     }
   }
 
