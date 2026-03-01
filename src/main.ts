@@ -22,21 +22,23 @@ async function init() {
 
   // Modern Vite way to load all calculators in the directory
   const modules = import.meta.glob('./calculators/*.ts');
+  const loadPromises = Object.keys(modules).map(path => 
+    (modules[path] as () => Promise<any>)().then(mod => ({ path, mod })).catch(() => null)
+  );
   
-  for (const path in modules) {
-    try {
-      const module: any = await (modules[path] as () => Promise<any>)();
-      // Register any object that looks like a Calculator
-      for (const key in module) {
-        const item = module[key];
-        if (item && typeof item === 'object' && item.id && item.render) {
-          registerCalculator(item);
-        }
+  const results = await Promise.all(loadPromises);
+  
+  results.forEach(result => {
+    if (!result) return;
+    const { mod } = result;
+    // Register any object that looks like a Calculator
+    for (const key in mod) {
+      const item = mod[key];
+      if (item && typeof item === 'object' && item.id && item.render) {
+        registerCalculator(item);
       }
-    } catch (e) {
-      console.error(`Gagal memuat kalkulator: ${path}`, e);
     }
-  }
+  });
 
   renderHome();
   
@@ -62,15 +64,15 @@ async function init() {
     });
   }
   
-  // Hide splash screen
+  // Hide splash screen after 2 seconds
   setTimeout(() => {
     const splash = document.getElementById('splash-screen');
     if (splash) {
       splash.classList.add('opacity-0');
       splash.style.pointerEvents = 'none';
-      setTimeout(() => splash.remove(), 500);
+      setTimeout(() => splash.remove(), 400);
     }
-  }, 1200);
+  }, 2000);
 }
 
 function getCategoryIcon(category: string): string {
