@@ -223,7 +223,7 @@ function renderHome() {
         </div>
 
         <!-- Popular Tools Section (Carousel) -->
-        <div class="section-container animate-fade-in overflow-hidden reveal">
+        <div class="section-container animate-fade-in overflow-hidden">
           <div class="flex items-center justify-between mb-5 px-2">
             <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
@@ -240,8 +240,10 @@ function renderHome() {
             <div id="popular-carousel" class="flex transition-transform duration-700 ease-in-out">
               ${[0, 1, 2, 0].map((slideIdx, i) => `
                 <div class="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1" ${i === 3 ? 'data-clone="true"' : ''}>
-                  ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map(c => `
-                    <button class="tool-card flex-col items-start p-4 popular-trigger group w-full" data-id="${c.id}">
+                  ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map((c, idx) => `
+                    <button class="tool-card flex-col items-start p-4 popular-trigger group w-full reveal" 
+                            style="transition-delay: ${idx * 50}ms"
+                            data-id="${c.id}">
                       <div class="tool-icon-wrapper mb-3 group-hover:bg-red-500 group-hover:text-white transition-colors">
                         ${getCategoryIcon(c.category)}
                       </div>
@@ -257,14 +259,16 @@ function renderHome() {
         <!-- Grouped List Section -->
         <div id="tools-list-container" class="space-y-10">
           ${groupedCalculators.map(group => `
-            <div class="category-section reveal" data-category="${group.name.toLowerCase()}">
+            <div class="category-section" data-category="${group.name.toLowerCase()}">
               <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
                 <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
                 ${group.name}
               </h3>
               <div class="space-y-4">
-                ${group.tools.map(c => `
-                  <button class="tool-card w-full text-left tool-item-trigger group" data-id="${c.id}" data-name="${c.name.toLowerCase()}">
+                ${group.tools.map((c, idx) => `
+                  <button class="tool-card w-full text-left tool-item-trigger group reveal" 
+                          style="transition-delay: ${idx * 50}ms"
+                          data-id="${c.id}" data-name="${c.name.toLowerCase()}">
                     <div class="tool-icon-wrapper group-hover:bg-red-500 group-hover:text-white transition-colors">
                       ${getCategoryIcon(c.category)}
                     </div>
