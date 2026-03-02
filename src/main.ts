@@ -72,7 +72,7 @@ async function init() {
     });
   }
   
-  // Hide splash screen after 2 seconds
+  // Hide splash screen after 1 second
   setTimeout(() => {
     const splash = document.getElementById('splash-screen');
     if (splash) {
@@ -80,7 +80,7 @@ async function init() {
       splash.style.pointerEvents = 'none';
       setTimeout(() => splash.remove(), 400);
     }
-  }, 2000);
+  }, 1000);
 }
 
 function getCategoryIcon(category: string): string {
@@ -191,7 +191,7 @@ function renderHome() {
               </div>
               <div class="hidden sm:block shrink-0">
                 <img src="https://ouch-cdn2.icons8.com/mS9W_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTYv/YjY1YjY1YjYtYjY1/Yy00YjY1LWJiNjUt/YjY1YjY1YjY1YjY1/LnN2Zw.png" 
-                     alt="Hero" class="w-24 h-24 object-contain opacity-80" referrerPolicy="no-referrer">
+                     alt="Hero" class="w-24 h-24 object-contain opacity-80" referrerPolicy="no-referrer" loading="lazy">
               </div>
             </div>
             
@@ -223,7 +223,7 @@ function renderHome() {
         </div>
 
         <!-- Popular Tools Section (Carousel) -->
-        <div class="section-container animate-fade-in overflow-hidden">
+        <div class="section-container animate-fade-in overflow-hidden reveal">
           <div class="flex items-center justify-between mb-5 px-2">
             <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
@@ -257,7 +257,7 @@ function renderHome() {
         <!-- Grouped List Section -->
         <div id="tools-list-container" class="space-y-10">
           ${groupedCalculators.map(group => `
-            <div class="category-section animate-fade-in" data-category="${group.name.toLowerCase()}">
+            <div class="category-section reveal" data-category="${group.name.toLowerCase()}">
               <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
                 <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
                 ${group.name}
@@ -513,6 +513,22 @@ function renderHome() {
       autoSlideInterval = setInterval(nextSlide, 4000);
     });
   }
+
+  // Scroll Reveal Observer
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Once revealed, no need to observe anymore
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
 
