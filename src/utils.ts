@@ -10,10 +10,10 @@ export function playSound(type: 'success' | 'error') {
 
 export function createInput(label: string, id: string, type: string = 'number', placeholder: string = ''): { wrapper: HTMLElement, input: HTMLInputElement } {
   const wrapper = document.createElement('div');
-  wrapper.className = 'mb-3';
+  wrapper.className = 'mb-2.5';
   
   const labelEl = document.createElement('label');
-  labelEl.className = 'block text-[11px] font-bold text-black/40 uppercase tracking-widest mb-2 px-1';
+  labelEl.className = 'block text-[9px] font-black text-black/30 uppercase tracking-[0.15em] mb-1.5 px-1';
   labelEl.textContent = label;
   labelEl.setAttribute('for', id);
   
@@ -21,7 +21,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
   input.id = id;
   input.type = type === 'number' ? 'text' : type;
   input.placeholder = placeholder;
-  input.className = 'w-full px-4 py-3 input-3d rounded-2xl text-sm font-medium text-black/50 transition-all outline-none';
+  input.className = 'w-full px-3 py-2 input-3d rounded-lg text-[12px] font-bold text-black/60 transition-all outline-none';
   
   if (type === 'number') {
     input.inputMode = 'numeric';
@@ -45,7 +45,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
 export function createButton(text: string, className: string = 'btn-3d'): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.textContent = text;
-  btn.className = `px-6 py-2.5 rounded-xl font-bold transition-all active:scale-95 text-xs uppercase tracking-widest inline-flex items-center justify-center ${className}`;
+  btn.className = `px-3 py-1.5 rounded-lg font-black transition-all active:scale-95 text-[9px] uppercase tracking-widest inline-flex items-center justify-center ${className}`;
   return btn;
 }
 
@@ -61,7 +61,7 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
   title.textContent = 'Hasil Perhitungan';
   
   const shareBtn = document.createElement('button');
-  shareBtn.className = 'btn-share p-2 rounded-lg flex items-center justify-center text-red-500 bg-red-500/5 border border-red-500/10 hover:bg-red-500/10 transition-all';
+  shareBtn.className = 'btn-share p-2 rounded-lg flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity';
   shareBtn.innerHTML = `
     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
@@ -94,7 +94,7 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
   header.appendChild(shareBtn);
   
   const display = document.createElement('div');
-  display.className = 'text-2xl font-black text-black/50 tracking-tight';
+  display.className = 'text-xl font-black text-black/50 tracking-tight';
   
   wrapper.appendChild(header);
   wrapper.appendChild(display);
@@ -117,7 +117,7 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
     title.classList.remove('text-red-500');
     title.classList.add('text-red-500');
     display.textContent = val;
-    display.className = 'text-2xl font-black text-black/50 tracking-tight';
+    display.className = 'text-xl font-black text-black/50 tracking-tight';
     shareBtn.classList.remove('hidden');
   };
 

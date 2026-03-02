@@ -180,7 +180,7 @@ function renderHome() {
         </div>
       </header>
 
-      <main class="max-w-2xl mx-auto w-full px-4 py-8 space-y-10">
+      <main id="main-container" class="max-w-2xl mx-auto w-full px-4 pt-4 pb-8 space-y-10 transition-all duration-300">
         <!-- Hero Section (Sticky when tool open) -->
         <div id="hero-section" class="transition-all duration-300">
           <div id="hero-content" class="hero-card animate-fade-in">
@@ -317,6 +317,7 @@ function renderHome() {
   const scrollTopBtn = document.getElementById('scroll-top')!;
 
   const heroSection = document.getElementById('hero-section')!;
+  const mainContainer = document.getElementById('main-container')!;
 
   const showCalculator = (calc: any) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // Removed as per request
@@ -330,6 +331,7 @@ function renderHome() {
       headerSearchInput.blur();
     }
 
+    mainContainer.classList.add('tool-active');
     heroSection.classList.add('sticky', 'top-12', 'z-[90]');
     copywritingView.classList.add('hidden');
     activeToolView.classList.remove('hidden');
@@ -359,6 +361,7 @@ function renderHome() {
   };
 
   const hideCalculator = () => {
+    mainContainer.classList.remove('tool-active');
     heroSection.classList.remove('sticky', 'top-12', 'z-[90]');
     activeToolView.classList.add('hidden');
     copywritingView.classList.remove('hidden');
