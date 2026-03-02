@@ -175,29 +175,29 @@ function renderHome() {
           <div id="hero-content" class="hero-card animate-fade-in">
             <div id="copywriting-view" class="flex items-center gap-6">
               <div class="flex-1">
-                <h2 class="text-2xl font-black text-white mb-2 leading-tight">Hitung Cepat, <span class="text-white/70">Hidup Lebih Mudah!</span></h2>
-                <p class="text-sm text-white/80 font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
+                <h2 class="text-2xl font-black text-black/80 mb-2 leading-tight">Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span></h2>
+                <p class="text-sm text-black/40 font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
               </div>
               <div class="hidden sm:block shrink-0">
                 <img src="https://ouch-cdn2.icons8.com/mS9W_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTYv/YjY1YjY1YjYtYjY1/Yy00YjY1LWJiNjUt/YjY1YjY1YjY1YjY1/LnN2Zw.png" 
-                     alt="Hero" class="w-24 h-24 object-contain brightness-0 invert opacity-80" referrerPolicy="no-referrer">
+                     alt="Hero" class="w-24 h-24 object-contain opacity-80" referrerPolicy="no-referrer">
               </div>
             </div>
             
             <!-- Active Tool Section -->
-            <div id="active-tool-view" class="hidden">
+            <div id="active-tool-view" class="hidden active-card animate-fade-in">
               <div class="flex items-center justify-between mb-5">
-                <button id="close-tool" class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all text-[10px] font-black uppercase tracking-widest shadow-sm border border-white/10">
+                <button id="close-tool" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 rounded-full text-red-600 transition-all text-[10px] font-black uppercase tracking-widest shadow-sm border border-red-100">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                   </svg>
                   Tutup Alat
                 </button>
-                <span id="active-tool-cat" class="text-[9px] font-black bg-white/10 text-white/60 px-3.5 py-2 rounded-full uppercase tracking-widest border border-white/10"></span>
+                <span id="active-tool-cat" class="text-[9px] font-black bg-slate-100 text-black/40 px-3.5 py-2 rounded-full uppercase tracking-widest border border-slate-200"></span>
               </div>
-              <h2 id="active-tool-name" class="text-xl font-black text-white mb-1.5"></h2>
-              <p id="active-tool-desc" class="text-xs text-white/70 mb-8 font-medium leading-relaxed"></p>
-              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-white/10"></div>
+              <h2 id="active-tool-name" class="text-xl font-black text-black/80 mb-1.5"></h2>
+              <p id="active-tool-desc" class="text-xs text-black/40 mb-8 font-medium leading-relaxed"></p>
+              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-slate-100"></div>
             </div>
           </div>
         </div>
