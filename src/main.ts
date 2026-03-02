@@ -141,30 +141,27 @@ function renderHome() {
 
   app.innerHTML = `
     <div class="min-h-screen flex flex-col bg-slate-50 selection:bg-red-500/30 pb-10">
-      <!-- Sticky Header -->
-      <header class="sticky top-0 z-[100] h-14 header-red flex items-center justify-between px-6 shadow-2xl">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-inner">
-            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+      <!-- Apple Style Sticky Header -->
+      <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-black/60" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
-          </div>
-          <div>
-            <h1 class="text-sm font-black tracking-tighter uppercase italic leading-none">Kalkulator Warga</h1>
-            <p class="text-[8px] font-bold opacity-60 uppercase tracking-widest mt-0.5">Asisten Digital Pintar</p>
+            <h1 class="text-sm font-bold tracking-tight text-black/60">Kalkulator Warga</h1>
           </div>
         </div>
         
-        <div class="flex items-center gap-4">
-          <div class="hidden sm:flex flex-col items-end leading-none border-r border-white/20 pr-4">
-            <span id="header-time" class="text-[10px] font-black tracking-widest">00:00:00</span>
-            <span class="text-[8px] font-bold opacity-60 uppercase tracking-tighter mt-0.5">${dateStr}</span>
+        <div class="flex items-center gap-6">
+          <div class="hidden sm:flex items-center gap-4 border-r border-black/10 pr-6">
+            <span id="header-time" class="text-[11px] font-medium tracking-widest text-black/60">00:00:00</span>
+            <span class="text-[10px] font-medium text-black/40 tracking-tight uppercase">${dateStr}</span>
           </div>
           <div id="header-search-container" class="relative flex items-center">
             <input type="text" id="header-search-input" placeholder="Cari alat..." 
-                   class="w-0 opacity-0 h-8 bg-white/20 border border-white/30 rounded-lg px-0 text-xs font-medium text-white placeholder:text-white/60 focus:outline-none transition-all duration-300">
-            <button id="header-search-toggle" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="w-0 opacity-0 h-7 bg-black/5 border border-black/10 rounded-md px-0 text-[11px] font-medium text-black placeholder:text-black/40 focus:outline-none transition-all duration-300">
+            <button id="header-search-toggle" class="p-1.5 hover:bg-black/5 rounded-md transition-colors">
+              <svg class="w-4 h-4 text-black/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </button>
@@ -296,7 +293,7 @@ function renderHome() {
 
   const showCalculator = (calc: any) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // Removed as per request
-    heroSection.classList.add('sticky', 'top-14', 'z-[90]');
+    heroSection.classList.add('sticky', 'top-12', 'z-[90]');
     copywritingView.classList.add('hidden');
     activeToolView.classList.remove('hidden');
     
@@ -310,7 +307,7 @@ function renderHome() {
   };
 
   const hideCalculator = () => {
-    heroSection.classList.remove('sticky', 'top-14', 'z-50');
+    heroSection.classList.remove('sticky', 'top-12', 'z-[90]');
     activeToolView.classList.add('hidden');
     copywritingView.classList.remove('hidden');
     // Refresh to update last tool
