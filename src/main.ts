@@ -251,8 +251,8 @@ function renderHome() {
           
           <div id="popular-carousel-container" class="relative overflow-hidden">
             <div id="popular-carousel" class="flex transition-transform duration-700 ease-in-out">
-              ${[0, 1, 2].map(slideIdx => `
-                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1">
+              ${[0, 1, 2, 0].map((slideIdx, i) => `
+                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1" ${i === 3 ? 'data-clone="true"' : ''}>
                   ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map(c => `
                     <button class="tool-card flex-col items-start p-4 popular-trigger group w-full" data-id="${c.id}">
                       <div class="tool-icon-wrapper mb-3 group-hover:bg-red-500 group-hover:text-white transition-colors">
@@ -413,8 +413,9 @@ function renderHome() {
     });
   });
 
-  // Carousel Auto-Slide Logic (4-4-4 formula: 4 items per slide, 3 slides, 4s interval)
+  // Carousel Logic (Infinite Loop + Touch Support)
   let currentSlide = 0;
+  let isTransitioning = false;
   const carousel = document.getElementById('popular-carousel');
   const dots = [
     document.getElementById('dot-0'),
@@ -422,20 +423,80 @@ function renderHome() {
     document.getElementById('dot-2')
   ];
 
-  if (carousel && dots[0]) {
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % 3;
-      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-      
-      dots.forEach((dot, i) => {
-        if (dot) {
-          dot.classList.toggle('bg-red-500', i === currentSlide);
-          dot.classList.toggle('bg-slate-200', i !== currentSlide);
-          dot.classList.toggle('w-3', i === currentSlide);
-          dot.classList.toggle('w-1', i !== currentSlide);
+  const updateDots = (index: number) => {
+    const dotIndex = index % 3;
+    dots.forEach((dot, i) => {
+      if (dot) {
+        dot.classList.toggle('bg-red-500', i === dotIndex);
+        dot.classList.toggle('bg-slate-200', i !== dotIndex);
+        dot.classList.toggle('w-3', i === dotIndex);
+        dot.classList.toggle('w-1', i !== dotIndex);
+      }
+    });
+  };
+
+  const goToSlide = (index: number, animate = true) => {
+    if (!carousel) return;
+    if (animate) {
+      carousel.style.transition = 'transform 0.7s ease-in-out';
+    } else {
+      carousel.style.transition = 'none';
+    }
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+    currentSlide = index;
+    updateDots(currentSlide);
+  };
+
+  const nextSlide = () => {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    goToSlide(currentSlide + 1);
+  };
+
+  if (carousel) {
+    carousel.addEventListener('transitionend', () => {
+      isTransitioning = false;
+      if (currentSlide === 3) {
+        goToSlide(0, false);
+      }
+    });
+
+    // Auto-slide
+    let autoSlideInterval = setInterval(nextSlide, 4000);
+
+    // Touch Support
+    let startX = 0;
+    let isDragging = false;
+
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      clearInterval(autoSlideInterval);
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          // Swipe Left -> Next
+          nextSlide();
+        } else {
+          // Swipe Right -> Prev
+          if (currentSlide === 0) {
+            goToSlide(3, false);
+            setTimeout(() => goToSlide(2), 10);
+          } else {
+            goToSlide(currentSlide - 1);
+          }
         }
-      });
-    }, 4000);
+      }
+      
+      isDragging = false;
+      autoSlideInterval = setInterval(nextSlide, 4000);
+    });
   }
 }
 
