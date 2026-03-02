@@ -292,6 +292,13 @@ function renderHome() {
           </p>
         </footer>
       </main>
+
+      <!-- Floating Scroll to Top -->
+      <button id="scroll-top" class="scroll-top-btn p-2 text-red-500 hover:text-red-600 transition-all">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+        </svg>
+      </button>
     </div>
   `;
 
@@ -307,6 +314,7 @@ function renderHome() {
   const lastToolLinkText = document.getElementById('last-tool-link-text')!;
   const headerSearchToggle = document.getElementById('header-search-toggle')!;
   const headerSearchInput = document.getElementById('header-search-input') as HTMLInputElement;
+  const scrollTopBtn = document.getElementById('scroll-top')!;
 
   const heroSection = document.getElementById('hero-section')!;
 
@@ -533,6 +541,19 @@ function renderHome() {
   });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Scroll to Top Logic
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  });
+
+  scrollTopBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 }
 
 
