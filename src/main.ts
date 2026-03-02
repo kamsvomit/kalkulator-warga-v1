@@ -151,7 +151,7 @@ function renderHome() {
   const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' });
 
   app.innerHTML = `
-    <div class="min-h-screen flex flex-col bg-slate-50 selection:bg-red-500/30">
+    <div class="min-h-screen flex flex-col bg-arsenic/[0.02] selection:bg-red-500/30">
       <!-- Apple Style Sticky Header -->
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
         <div class="flex items-center gap-4">
@@ -164,14 +164,14 @@ function renderHome() {
         </div>
         
         <div class="flex items-center gap-6">
-          <div class="hidden sm:flex items-center gap-4 border-r border-black/10 pr-6">
+          <div class="hidden sm:flex items-center gap-4 border-r border-arsenic/10 pr-6">
             <span id="header-time" class="text-[11px] font-medium tracking-widest text-red-600">00:00:00</span>
             <span class="text-[10px] font-medium text-red-600/60 tracking-tight uppercase">${dateStr}</span>
           </div>
           <div id="header-search-container" class="relative flex items-center">
             <input type="text" id="header-search-input" placeholder="Cari alat..." 
-                   class="w-0 opacity-0 h-7 bg-black/5 border border-black/10 rounded-md px-0 text-[11px] font-medium text-black placeholder:text-black/40 focus:outline-none transition-all duration-300">
-            <button id="header-search-toggle" class="p-1.5 hover:bg-black/5 rounded-md transition-colors">
+                   class="w-0 opacity-0 h-7 bg-arsenic/5 border border-arsenic/10 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
+            <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
               <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
@@ -186,8 +186,8 @@ function renderHome() {
           <div id="hero-content" class="hero-card animate-fade-in">
             <div id="copywriting-view" class="flex items-center gap-6">
               <div class="flex-1">
-                <h2 class="text-2xl font-black text-black/80 mb-2 leading-tight">Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span></h2>
-                <p class="text-sm text-black/40 font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
+                <h2 class="text-2xl font-black text-arsenic mb-2 leading-tight">Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span></h2>
+                <p class="text-sm text-arsenic font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
               </div>
               <div class="hidden sm:block shrink-0">
                 <img src="https://ouch-cdn2.icons8.com/mS9W_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTYv/YjY1YjY1YjYtYjY1/Yy00YjY1LWJiNjUt/YjY1YjY1YjY1YjY1/LnN2Zw.png" 
@@ -204,15 +204,15 @@ function renderHome() {
                   </svg>
                   Tutup
                 </button>
-                <span id="active-tool-cat" class="text-[8px] font-black text-black/30 px-2 py-1 rounded-md uppercase tracking-widest border border-slate-200/60 bg-slate-50"></span>
+                <span id="active-tool-cat" class="text-[8px] font-black text-arsenic px-2 py-1 rounded-md uppercase tracking-widest border border-arsenic/10 bg-arsenic/5"></span>
               </div>
-              <h2 id="active-tool-name" class="text-xl font-black text-black/80 mb-1"></h2>
-              <p id="active-tool-desc" class="text-xs text-black/40 mb-6 font-medium leading-relaxed"></p>
-              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-slate-100"></div>
+              <h2 id="active-tool-name" class="text-xl font-black text-arsenic mb-1"></h2>
+              <p id="active-tool-desc" class="text-xs text-arsenic mb-6 font-medium leading-relaxed"></p>
+              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-arsenic/10"></div>
               
               <!-- Last Tool Info (Moved here) -->
-              <div id="last-tool-info" class="mt-8 pt-6 border-t border-slate-100 hidden">
-                <p class="text-[10px] font-black text-black/20 uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
+              <div id="last-tool-info" class="mt-8 pt-6 border-t border-arsenic/10 hidden">
+                <p class="text-[10px] font-black text-arsenic uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
                 <button id="last-tool-link" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors flex items-center gap-2 group">
                   <span class="group-hover:-translate-x-1 transition-transform">←</span>
                   <span id="last-tool-link-text"></span>
@@ -225,14 +225,14 @@ function renderHome() {
         <!-- Popular Tools Section (Carousel) -->
         <div class="section-container animate-fade-in overflow-hidden">
           <div class="flex items-center justify-between mb-5 px-2">
-            <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest flex items-center gap-2">
+            <h3 class="text-[10px] font-black text-arsenic uppercase tracking-widest flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
               Paling Dicari
             </h3>
             <div class="flex gap-1.5">
               <div id="dot-0" class="carousel-dot w-3 h-1 rounded-full bg-red-500 transition-all duration-500"></div>
-              <div id="dot-1" class="carousel-dot w-1 h-1 rounded-full bg-slate-200 transition-all duration-500"></div>
-              <div id="dot-2" class="carousel-dot w-1 h-1 rounded-full bg-slate-200 transition-all duration-500"></div>
+              <div id="dot-1" class="carousel-dot w-1 h-1 rounded-full bg-arsenic/10 transition-all duration-500"></div>
+              <div id="dot-2" class="carousel-dot w-1 h-1 rounded-full bg-arsenic/10 transition-all duration-500"></div>
             </div>
           </div>
           
@@ -247,7 +247,7 @@ function renderHome() {
                       <div class="tool-icon-wrapper mb-3 group-hover:bg-red-500 group-hover:text-white transition-colors">
                         ${getCategoryIcon(c.category)}
                       </div>
-                      <h4 class="font-bold text-black/50 text-[11px] leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
+                      <h4 class="font-bold text-arsenic text-[11px] leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
                     </button>
                   `).join('')}
                 </div>
@@ -260,7 +260,7 @@ function renderHome() {
         <div id="tools-list-container" class="space-y-10">
           ${groupedCalculators.map(group => `
             <div class="category-section" data-category="${group.name.toLowerCase()}">
-              <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
+              <h3 class="text-[10px] font-black text-arsenic uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
                 <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
                 ${group.name}
               </h3>
@@ -273,10 +273,10 @@ function renderHome() {
                       ${getCategoryIcon(c.category)}
                     </div>
                     <div class="flex-1">
-                      <h4 class="font-bold text-black/50 text-sm group-hover:text-red-600 transition-colors">${c.name}</h4>
-                      <p class="text-[10px] text-black/30 font-bold uppercase tracking-tight">${c.category}</p>
+                      <h4 class="font-bold text-arsenic text-sm group-hover:text-red-600 transition-colors">${c.name}</h4>
+                      <p class="text-[10px] text-arsenic font-bold uppercase tracking-tight">${c.category}</p>
                     </div>
-                    <svg class="w-4 h-4 text-slate-300 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-arsenic group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </button>
@@ -286,8 +286,8 @@ function renderHome() {
           `).join('')}
         </div>
 
-        <footer class="py-12 text-center border-t border-slate-200/60">
-          <p class="text-[10px] text-black/30 font-black uppercase tracking-[0.3em]">
+        <footer class="py-12 text-center border-t border-arsenic/10">
+          <p class="text-[10px] text-arsenic font-black uppercase tracking-[0.3em]">
             Digital Assistant v2.1 • 2026
           </p>
         </footer>
@@ -458,7 +458,7 @@ function renderHome() {
     dots.forEach((dot, i) => {
       if (dot) {
         dot.classList.toggle('bg-red-500', i === dotIndex);
-        dot.classList.toggle('bg-slate-200', i !== dotIndex);
+        dot.classList.toggle('bg-arsenic/10', i !== dotIndex);
         dot.classList.toggle('w-3', i === dotIndex);
         dot.classList.toggle('w-1', i !== dotIndex);
       }

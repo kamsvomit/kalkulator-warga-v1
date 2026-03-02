@@ -13,7 +13,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
   wrapper.className = 'mb-2.5';
   
   const labelEl = document.createElement('label');
-  labelEl.className = 'block text-[9px] font-black text-black/30 uppercase tracking-[0.15em] mb-1.5 px-1';
+  labelEl.className = 'block text-[9px] font-black text-arsenic uppercase tracking-[0.15em] mb-1.5 px-1';
   labelEl.textContent = label;
   labelEl.setAttribute('for', id);
   
@@ -21,7 +21,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
   input.id = id;
   input.type = type === 'number' ? 'text' : type;
   input.placeholder = placeholder;
-  input.className = 'w-full px-3 py-2 input-3d rounded-lg text-[12px] font-bold text-black/60 transition-all outline-none';
+  input.className = 'w-full px-3 py-2 input-3d rounded-lg text-[12px] font-bold text-arsenic transition-all outline-none';
   
   if (type === 'number') {
     input.inputMode = 'numeric';
@@ -94,7 +94,7 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
   header.appendChild(shareBtn);
   
   const display = document.createElement('div');
-  display.className = 'text-xl font-black text-black/50 tracking-tight';
+  display.className = 'text-xl font-black text-arsenic tracking-tight';
   
   wrapper.appendChild(header);
   wrapper.appendChild(display);
@@ -117,7 +117,7 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
     title.classList.remove('text-red-500');
     title.classList.add('text-red-500');
     display.textContent = val;
-    display.className = 'text-xl font-black text-black/50 tracking-tight';
+    display.className = 'text-xl font-black text-arsenic tracking-tight';
     shareBtn.classList.remove('hidden');
   };
 
