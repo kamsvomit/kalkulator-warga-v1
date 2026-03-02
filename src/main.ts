@@ -318,6 +318,16 @@ function renderHome() {
 
   const showCalculator = (calc: any) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // Removed as per request
+    
+    // Clear search if active
+    if (headerSearchInput.value !== '') {
+      headerSearchInput.value = '';
+      headerSearchInput.dispatchEvent(new Event('input'));
+      headerSearchInput.classList.remove('w-40', 'opacity-100', 'px-3', 'mr-2');
+      headerSearchInput.classList.add('w-0', 'opacity-0', 'px-0');
+      headerSearchInput.blur();
+    }
+
     heroSection.classList.add('sticky', 'top-12', 'z-[90]');
     copywritingView.classList.add('hidden');
     activeToolView.classList.remove('hidden');
