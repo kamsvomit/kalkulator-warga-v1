@@ -126,8 +126,19 @@ function renderHome() {
   const lastToolId = localStorage.getItem('last_tool_id');
   const lastTool = normalizedCalculators.find(c => c.id === lastToolId);
   
-  const popularIds = ['bmi', 'gaji-bersih', 'diskon-persen', 'persen'];
+  const popularIds = [
+    'bmi', 'gaji-bersih', 'diskon-persen', 'persen',
+    'cicilan-bulanan', 'hpp', 'konsumsi-bensin', 'listrik-bulanan',
+    'profit-jualan', 'target-hp', 'calculator10', 'calculator20'
+  ];
   const popularCalculators = normalizedCalculators.filter(c => popularIds.includes(c.id));
+  
+  // Ensure we have exactly 12 for the 4-4-4 carousel (padding if needed)
+  while (popularCalculators.length < 12 && normalizedCalculators.length > 0) {
+    const extra = normalizedCalculators.find(c => !popularIds.includes(c.id) && !popularCalculators.includes(c));
+    if (extra) popularCalculators.push(extra);
+    else break;
+  }
 
   // Group by category
   const categories = [...new Set(normalizedCalculators.map(c => c.category))].sort();
@@ -224,21 +235,35 @@ function renderHome() {
           </div>
         ` : ''}
 
-        <!-- Popular Tools Section -->
-        <div class="section-container animate-fade-in">
-          <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
-            <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-            Paling Dicari
-          </h3>
-          <div class="grid grid-cols-2 gap-4">
-            ${popularCalculators.map(c => `
-              <button class="tool-card flex-col items-start p-5 popular-trigger group" data-id="${c.id}">
-                <div class="tool-icon-wrapper mb-4 group-hover:bg-red-500 group-hover:text-white transition-colors">
-                  ${getCategoryIcon(c.category)}
+        <!-- Popular Tools Section (Carousel) -->
+        <div class="section-container animate-fade-in overflow-hidden">
+          <div class="flex items-center justify-between mb-5 px-2">
+            <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest flex items-center gap-2">
+              <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+              Paling Dicari
+            </h3>
+            <div class="flex gap-1.5">
+              <div id="dot-0" class="carousel-dot w-3 h-1 rounded-full bg-red-500 transition-all duration-500"></div>
+              <div id="dot-1" class="carousel-dot w-1 h-1 rounded-full bg-slate-200 transition-all duration-500"></div>
+              <div id="dot-2" class="carousel-dot w-1 h-1 rounded-full bg-slate-200 transition-all duration-500"></div>
+            </div>
+          </div>
+          
+          <div id="popular-carousel-container" class="relative overflow-hidden">
+            <div id="popular-carousel" class="flex transition-transform duration-700 ease-in-out">
+              ${[0, 1, 2].map(slideIdx => `
+                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1">
+                  ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map(c => `
+                    <button class="tool-card flex-col items-start p-4 popular-trigger group w-full" data-id="${c.id}">
+                      <div class="tool-icon-wrapper mb-3 group-hover:bg-red-500 group-hover:text-white transition-colors">
+                        ${getCategoryIcon(c.category)}
+                      </div>
+                      <h4 class="font-bold text-black/50 text-[11px] leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
+                    </button>
+                  `).join('')}
                 </div>
-                <h4 class="font-bold text-black/50 text-xs leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
-              </button>
-            `).join('')}
+              `).join('')}
+            </div>
           </div>
         </div>
 
@@ -387,6 +412,31 @@ function renderHome() {
       if (calc) showCalculator(calc);
     });
   });
+
+  // Carousel Auto-Slide Logic (4-4-4 formula: 4 items per slide, 3 slides, 4s interval)
+  let currentSlide = 0;
+  const carousel = document.getElementById('popular-carousel');
+  const dots = [
+    document.getElementById('dot-0'),
+    document.getElementById('dot-1'),
+    document.getElementById('dot-2')
+  ];
+
+  if (carousel && dots[0]) {
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % 3;
+      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      dots.forEach((dot, i) => {
+        if (dot) {
+          dot.classList.toggle('bg-red-500', i === currentSlide);
+          dot.classList.toggle('bg-slate-200', i !== currentSlide);
+          dot.classList.toggle('w-3', i === currentSlide);
+          dot.classList.toggle('w-1', i !== currentSlide);
+        }
+      });
+    }, 4000);
+  }
 }
 
 
