@@ -151,7 +151,7 @@ function renderHome() {
   const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' });
 
   app.innerHTML = `
-    <div class="min-h-screen flex flex-col bg-slate-50 selection:bg-red-500/30 pb-10">
+    <div class="min-h-screen flex flex-col bg-slate-50 selection:bg-red-500/30">
       <!-- Apple Style Sticky Header -->
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
         <div class="flex items-center gap-4">
@@ -285,13 +285,13 @@ function renderHome() {
             </div>
           `).join('')}
         </div>
-      </main>
 
-      <footer class="py-8 text-center border-t border-slate-100 bg-white">
-        <p class="text-[10px] text-black/30 font-black uppercase tracking-[0.3em]">
-          Digital Assistant v2.1 • 2026
-        </p>
-      </footer>
+        <footer class="py-12 text-center border-t border-slate-200/60">
+          <p class="text-[10px] text-black/30 font-black uppercase tracking-[0.3em]">
+            Digital Assistant v2.1 • 2026
+          </p>
+        </footer>
+      </main>
     </div>
   `;
 
