@@ -45,7 +45,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
 export function createButton(text: string, className: string = 'btn-3d'): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.textContent = text;
-  btn.className = `px-3 py-1.5 rounded-lg font-black transition-all active:scale-95 text-[9px] uppercase tracking-widest inline-flex items-center justify-center ${className}`;
+  btn.className = `px-4 py-2 rounded-lg font-black transition-all active:scale-95 text-[11px] uppercase tracking-widest inline-flex items-center justify-center ${className}`;
   return btn;
 }
 

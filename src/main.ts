@@ -198,7 +198,7 @@ function renderHome() {
             <!-- Active Tool Section -->
             <div id="active-tool-view" class="hidden active-card animate-fade-in">
               <div class="flex items-center justify-between mb-4">
-                <button id="close-tool" class="flex items-center gap-1.5 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-red-600 transition-all text-[9px] font-black uppercase tracking-widest border border-red-100/50">
+                <button id="close-tool" class="flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 rounded-lg text-red-600 transition-all text-[11px] font-black uppercase tracking-widest border border-red-100/50">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
                   </svg>
