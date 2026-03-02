@@ -156,23 +156,23 @@ function renderHome() {
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-black/60" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
-            <h1 class="text-sm font-bold tracking-tight text-black/60">Kalkulator Warga</h1>
+            <h1 class="text-sm font-bold tracking-tight text-red-600">Kalkulator Warga</h1>
           </div>
         </div>
         
         <div class="flex items-center gap-6">
           <div class="hidden sm:flex items-center gap-4 border-r border-black/10 pr-6">
-            <span id="header-time" class="text-[11px] font-medium tracking-widest text-black/60">00:00:00</span>
-            <span class="text-[10px] font-medium text-black/40 tracking-tight uppercase">${dateStr}</span>
+            <span id="header-time" class="text-[11px] font-medium tracking-widest text-red-600">00:00:00</span>
+            <span class="text-[10px] font-medium text-red-600/60 tracking-tight uppercase">${dateStr}</span>
           </div>
           <div id="header-search-container" class="relative flex items-center">
             <input type="text" id="header-search-input" placeholder="Cari alat..." 
                    class="w-0 opacity-0 h-7 bg-black/5 border border-black/10 rounded-md px-0 text-[11px] font-medium text-black placeholder:text-black/40 focus:outline-none transition-all duration-300">
             <button id="header-search-toggle" class="p-1.5 hover:bg-black/5 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-black/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </button>
@@ -294,9 +294,9 @@ function renderHome() {
       </main>
 
       <!-- Floating Scroll to Top -->
-      <button id="scroll-top" class="scroll-top-btn p-2 text-red-500 hover:text-red-600 transition-all">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path>
+      <button id="scroll-top" class="scroll-top-btn p-2 text-red-600 hover:text-red-700 transition-all">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 8.5L5 15.5L6.41 16.91L12 11.33L17.59 16.91L19 15.5L12 8.5Z"/>
         </svg>
       </button>
     </div>
