@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency, parseValue } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, parseValue, setupEnterKeyNavigation } from '../utils';
 
 export const gajiBersih: Calculator = {
   id: 'gaji-bersih',
@@ -12,7 +12,7 @@ export const gajiBersih: Calculator = {
     
     const calcBtn = createButton('Hitung Gaji Bersih');
     const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(gWrap);
     container.appendChild(pWrap);
@@ -24,10 +24,16 @@ export const gajiBersih: Calculator = {
       const gross = parseValue(gInput.value);
       const deductions = parseValue(pInput.value) || 0;
       
-      if (gross > 0) {
+      if (!gInput.value) {
+        showError('Harap masukkan nominal gaji kotor Anda.');
+        return;
+      }
+
+      if (gross >= 0) {
         const net = gross - deductions;
-        resDisplay.textContent = formatCurrency(net);
-        resWrap.classList.remove('hidden');
+        showResult(formatCurrency(net));
+      } else {
+        showError('Gaji kotor tidak boleh negatif.');
       }
     };
 
@@ -35,6 +41,8 @@ export const gajiBersih: Calculator = {
       gInput.value = ''; pInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
 

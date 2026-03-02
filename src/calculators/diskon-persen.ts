@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency, parseValue } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, parseValue, setupEnterKeyNavigation } from '../utils';
 
 export const diskonPersen: Calculator = {
   id: 'diskon-persen',
@@ -12,7 +12,7 @@ export const diskonPersen: Calculator = {
     
     const calcBtn = createButton('Hitung Diskon');
     const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(hWrap);
     container.appendChild(dWrap);
@@ -24,15 +24,22 @@ export const diskonPersen: Calculator = {
       const price = parseValue(hInput.value);
       const discount = parseValue(dInput.value);
       
+      if (!hInput.value || !dInput.value) {
+        showError('Harap masukkan harga awal dan persentase diskon.');
+        return;
+      }
+
       if (price > 0 && discount >= 0) {
         const amount = (discount / 100) * price;
         const final = price - amount;
         
-        resDisplay.innerHTML = `
-          <div>${formatCurrency(final)}</div>
-          <div class="text-sm font-medium text-slate-500 mt-1">Hemat: ${formatCurrency(amount)}</div>
-        `;
-        resWrap.classList.remove('hidden');
+        showResult(formatCurrency(final));
+        const hematEl = document.createElement('div');
+        hematEl.className = 'text-sm font-medium text-slate-500 mt-1';
+        hematEl.textContent = `Hemat: ${formatCurrency(amount)}`;
+        resWrap.querySelector('div:last-child')?.appendChild(hematEl);
+      } else {
+        showError('Harga harus lebih dari 0 dan diskon tidak boleh negatif.');
       }
     };
 
@@ -40,6 +47,8 @@ export const diskonPersen: Calculator = {
       hInput.value = ''; dInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
 

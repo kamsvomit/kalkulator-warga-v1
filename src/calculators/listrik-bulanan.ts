@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency, parseValue } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, parseValue, setupEnterKeyNavigation } from '../utils';
 
 export const listrikBulanan: Calculator = {
   id: 'listrik-bulanan',
@@ -12,7 +12,7 @@ export const listrikBulanan: Calculator = {
     
     const calcBtn = createButton('Hitung Tagihan');
     const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(kWrap);
     container.appendChild(tWrap);
@@ -24,10 +24,16 @@ export const listrikBulanan: Calculator = {
       const kwh = parseValue(kInput.value);
       const rate = parseValue(tInput.value) || 1444;
       
-      if (kwh > 0) {
+      if (!kInput.value) {
+        showError('Harap masukkan jumlah pemakaian kWh.');
+        return;
+      }
+
+      if (kwh >= 0) {
         const total = kwh * rate;
-        resDisplay.textContent = formatCurrency(total);
-        resWrap.classList.remove('hidden');
+        showResult(formatCurrency(total));
+      } else {
+        showError('Pemakaian tidak boleh negatif.');
       }
     };
 
@@ -35,6 +41,8 @@ export const listrikBulanan: Calculator = {
       kInput.value = ''; tInput.value = '1.444';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
 

@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, parseValue } from '../utils';
+import { createInput, createButton, createResultDisplay, parseValue, setupEnterKeyNavigation } from '../utils';
 
 export const konsumsiBensin: Calculator = {
   id: 'konsumsi-bensin',
@@ -12,7 +12,7 @@ export const konsumsiBensin: Calculator = {
     
     const calcBtn = createButton('Hitung Konsumsi');
     const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(dWrap);
     container.appendChild(lWrap);
@@ -24,10 +24,16 @@ export const konsumsiBensin: Calculator = {
       const dist = parseValue(dInput.value);
       const liters = parseValue(lInput.value);
       
+      if (!dInput.value || !lInput.value) {
+        showError('Harap masukkan jarak tempuh dan jumlah bensin.');
+        return;
+      }
+
       if (dist > 0 && liters > 0) {
         const consumption = dist / liters;
-        resDisplay.textContent = `${consumption.toFixed(2)} km/liter`;
-        resWrap.classList.remove('hidden');
+        showResult(`${consumption.toFixed(2)} km/liter`);
+      } else {
+        showError('Data harus lebih dari 0.');
       }
     };
 
@@ -35,6 +41,8 @@ export const konsumsiBensin: Calculator = {
       dInput.value = ''; lInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
 

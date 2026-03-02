@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, parseValue } from '../utils';
+import { createInput, createButton, createResultDisplay, parseValue, setupEnterKeyNavigation } from '../utils';
 
 export const persen: Calculator = {
   id: 'persen',
@@ -12,7 +12,7 @@ export const persen: Calculator = {
     
     const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(pWrap);
     container.appendChild(vWrap);
@@ -23,10 +23,17 @@ export const persen: Calculator = {
     calcBtn.onclick = () => {
       const p = parseValue(pInput.value);
       const v = parseValue(vInput.value);
+      
+      if (!pInput.value || !vInput.value) {
+        showError('Harap masukkan persentase dan nilai angka.');
+        return;
+      }
+
       if (!isNaN(p) && !isNaN(v)) {
         const res = (p / 100) * v;
-        resDisplay.textContent = res.toLocaleString('id-ID');
-        resWrap.classList.remove('hidden');
+        showResult(res.toLocaleString('id-ID'));
+      } else {
+        showError('Masukkan angka yang valid.');
       }
     };
 
@@ -34,6 +41,8 @@ export const persen: Calculator = {
       pInput.value = ''; vInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
 

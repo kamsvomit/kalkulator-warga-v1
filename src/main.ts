@@ -42,6 +42,14 @@ async function init() {
 
   renderHome();
   
+  // Clock Update
+  setInterval(() => {
+    const headerTime = document.getElementById('header-time');
+    if (headerTime) {
+      headerTime.textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
+    }
+  }, 1000);
+  
   // Setup global sound listener for results
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -95,30 +103,17 @@ function getCategoryIcon(category: string): string {
 function renderHome() {
   const app = document.getElementById('app')!;
   
-  // Normalize categories for consistent grouping
   const normalizeCategory = (cat: string) => {
     const map: Record<string, string> = {
-      'Finance': 'Keuangan',
-      'Math': 'Matematika',
-      'Fitness': 'Kebugaran',
-      'Home': 'Rumah',
-      'Conversion': 'Konversi',
-      'Misc': 'Utilitas',
-      'Daily Life': 'Kehidupan Sehari-hari',
-      'Shopping': 'Belanja',
-      'Bisnis & Jualan': 'Bisnis',
-      'Matematika & Umum': 'Matematika',
-      'Belanja & Diskon': 'Belanja',
-      'Lain-lain': 'Utilitas',
-      'Kendaraan & Bensin': 'Utilitas',
-      'Tagihan Rumah': 'Rumah',
-      'Gaji & Pendapatan': 'Keuangan',
-      'Target Keuangan': 'Keuangan',
-      'Hutang & Tabungan': 'Keuangan',
-      'Gaji & Pajak': 'Keuangan',
-      'Kendaraan': 'Utilitas',
-      'Rumah Tangga': 'Rumah',
-      'Tabungan': 'Keuangan'
+      'Finance': 'Keuangan', 'Math': 'Matematika', 'Fitness': 'Kebugaran',
+      'Home': 'Rumah', 'Conversion': 'Konversi', 'Misc': 'Utilitas',
+      'Daily Life': 'Kehidupan Sehari-hari', 'Shopping': 'Belanja',
+      'Bisnis & Jualan': 'Bisnis', 'Matematika & Umum': 'Matematika',
+      'Belanja & Diskon': 'Belanja', 'Lain-lain': 'Utilitas',
+      'Kendaraan & Bensin': 'Utilitas', 'Tagihan Rumah': 'Rumah',
+      'Gaji & Pendapatan': 'Keuangan', 'Target Keuangan': 'Keuangan',
+      'Hutang & Tabungan': 'Keuangan', 'Gaji & Pajak': 'Keuangan',
+      'Kendaraan': 'Utilitas', 'Rumah Tangga': 'Rumah', 'Tabungan': 'Keuangan'
     };
     return map[cat] || cat;
   };
@@ -128,228 +123,276 @@ function renderHome() {
     category: normalizeCategory(c.category)
   }));
 
-  // Group calculators by category
-  const categories = Array.from(new Set(normalizedCalculators.map(c => c.category))).sort();
+  const lastToolId = localStorage.getItem('last_tool_id');
+  const lastTool = normalizedCalculators.find(c => c.id === lastToolId);
+  
+  const popularIds = ['bmi', 'gaji-bersih', 'diskon-persen', 'persen'];
+  const popularCalculators = normalizedCalculators.filter(c => popularIds.includes(c.id));
+
+  // Group by category
+  const categories = [...new Set(normalizedCalculators.map(c => c.category))].sort();
   const groupedCalculators = categories.map(cat => ({
     name: cat,
-    items: normalizedCalculators.filter(c => c.category === cat).sort((a, b) => a.name.localeCompare(b.name))
+    tools: normalizedCalculators.filter(c => c.category === cat).sort((a, b) => a.name.localeCompare(b.name))
   }));
 
-  app.innerHTML = `
-    <div class="h-screen h-[100dvh] flex flex-col bg-transparent selection:bg-indigo-500/30 overflow-hidden">
-      <!-- Floating Background Elements -->
-      <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full animate-float"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-blue-600/10 blur-[100px] rounded-full animate-float" style="animation-delay: -2s"></div>
-      </div>
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' });
 
-      <header class="h-16 flex items-center px-4 sm:px-8 shrink-0 sticky top-0 z-50 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 btn-3d">
-            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+  app.innerHTML = `
+    <div class="min-h-screen flex flex-col bg-slate-50 selection:bg-red-500/30 pb-10">
+      <!-- Sticky Header -->
+      <header class="sticky top-0 z-[100] h-14 header-red flex items-center justify-between px-6 shadow-2xl">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-inner">
+            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
           </div>
           <div>
-            <h1 class="text-lg font-black tracking-tighter text-white uppercase italic">Kalkulator Warga</h1>
-            <p class="text-[9px] text-indigo-400 font-bold uppercase tracking-widest">Digital Assistant v2.0</p>
+            <h1 class="text-sm font-black tracking-tighter uppercase italic leading-none">Kalkulator Warga</h1>
+            <p class="text-[8px] font-bold opacity-60 uppercase tracking-widest mt-0.5">Asisten Digital Pintar</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="hidden sm:flex flex-col items-end leading-none border-r border-white/20 pr-4">
+            <span id="header-time" class="text-[10px] font-black tracking-widest">00:00:00</span>
+            <span class="text-[8px] font-bold opacity-60 uppercase tracking-tighter mt-0.5">${dateStr}</span>
+          </div>
+          <div id="header-search-container" class="relative flex items-center">
+            <input type="text" id="header-search-input" placeholder="Cari alat..." 
+                   class="w-0 opacity-0 h-8 bg-white/20 border border-white/30 rounded-lg px-0 text-xs font-medium text-white placeholder:text-white/60 focus:outline-none transition-all duration-300">
+            <button id="header-search-toggle" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
 
-      <main class="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 flex flex-col overflow-y-auto no-scrollbar relative z-10">
-        <div class="mb-10 shrink-0">
-          <label class="block text-[10px] font-black text-indigo-300 uppercase tracking-[0.3em] mb-4 px-1 text-center sm:text-left">Pilih Layanan Digital</label>
-          <div class="w-full">
-            <div class="relative w-full">
-              <!-- Custom Searchable Dropdown -->
-              <div class="relative w-full">
-                <button id="dropdown-trigger" class="dropdown-3d w-full h-14 px-5 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all cursor-pointer text-xs font-bold text-white flex items-center justify-between">
-                  <span id="selected-label">— Cari layanan di sini —</span>
-                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                
-                <div id="dropdown-panel" class="dropdown-panel absolute top-full left-0 w-full mt-2 rounded-2xl overflow-hidden hidden animate-fade-in max-h-[400px] flex flex-col bg-[#1a1a2e] border border-white/10 shadow-2xl z-50">
-                  <div class="search-input-container p-3">
-                    <div class="relative">
-                      <input type="text" id="search-input" placeholder="Cari kalkulator..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-indigo-500/50">
-                      <svg class="absolute right-3 top-2.5 w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div id="dropdown-list" class="overflow-y-auto flex-1 py-2">
-                    ${groupedCalculators.map(group => `
-                      <div class="category-group" data-category="${group.name}">
-                        <div class="category-header flex items-center space-x-2 px-4 py-2 bg-white/5 border-y border-white/5 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
-                          <span class="opacity-50">${getCategoryIcon(group.name)}</span>
-                          <span>${group.name}</span>
-                        </div>
-                        ${group.items.map(c => `
-                          <button class="dropdown-item w-full px-4 py-3 text-left text-xs font-bold text-slate-300 flex items-center space-x-3 hover:bg-white/5 transition-colors" data-id="${c.id}" data-name="${c.name.toLowerCase()}">
-                            <span class="text-indigo-400 opacity-70">${getCategoryIcon(c.category)}</span>
-                            <span>${c.name}</span>
-                          </button>
-                        `).join('')}
-                      </div>
-                    `).join('')}
-                  </div>
-                </div>
+      <main class="max-w-2xl mx-auto w-full px-4 py-8 space-y-10">
+        <!-- Hero Section (Sticky when tool open) -->
+        <div id="hero-section" class="transition-all duration-300">
+          <div id="hero-content" class="hero-card animate-fade-in">
+            <div id="copywriting-view" class="flex items-center gap-6">
+              <div class="flex-1">
+                <h2 class="text-2xl font-black text-black/50 mb-2 leading-tight">Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span></h2>
+                <p class="text-sm text-black/40 font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
+              </div>
+              <div class="hidden sm:block shrink-0">
+                <img src="https://ouch-cdn2.icons8.com/mS9W_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTYv/YjY1YjY1YjYtYjY1/Yy00YjY1LWJiNjUt/YjY1YjY1YjY1YjY1/LnN2Zw.png" 
+                     alt="Hero" class="w-24 h-24 object-contain" referrerPolicy="no-referrer">
               </div>
             </div>
+            
+            <!-- Active Tool Section -->
+            <div id="active-tool-view" class="hidden">
+              <div class="flex items-center justify-between mb-5">
+                <button id="close-tool" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 rounded-full text-red-600 transition-all text-[10px] font-black uppercase tracking-widest shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  Tutup Alat
+                </button>
+                <span id="active-tool-cat" class="text-[9px] font-black bg-slate-100 text-black/40 px-3.5 py-2 rounded-full uppercase tracking-widest"></span>
+              </div>
+              <h2 id="active-tool-name" class="text-xl font-black text-black/50 mb-1.5"></h2>
+              <p id="active-tool-desc" class="text-xs text-black/40 mb-8 font-medium leading-relaxed"></p>
+              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-4 border-t border-slate-100"></div>
+            </div>
           </div>
         </div>
 
-        <div id="tool-display" class="glass-card flex-none flex flex-col p-6 sm:p-10 rounded-[2.5rem] min-h-[400px] mb-10">
-          <div id="last-tool-hint" class="hidden mb-4 animate-fade-in">
-            <button id="last-tool-btn" class="text-[10px] font-bold text-indigo-400/60 hover:text-indigo-400 uppercase tracking-widest flex items-center gap-2 transition-colors">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <!-- Last Tool Section -->
+        ${lastTool ? `
+          <div class="section-container animate-fade-in">
+            <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
+              <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+              Terakhir Digunakan
+            </h3>
+            <button class="tool-card w-full text-left last-tool-trigger group" data-id="${lastTool.id}">
+              <div class="tool-icon-wrapper group-hover:bg-red-500 group-hover:text-white transition-colors">
+                ${getCategoryIcon(lastTool.category)}
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-black/50 text-sm group-hover:text-red-600 transition-colors">${lastTool.name}</h4>
+                <p class="text-[10px] text-black/30 font-bold uppercase tracking-tight">${lastTool.category}</p>
+              </div>
+              <svg class="w-5 h-5 text-slate-300 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
-              <span>Terakhir digunakan: <span id="last-tool-name"></span></span>
             </button>
           </div>
-          <div id="placeholder" class="flex-1 flex flex-col items-center justify-center text-center animate-fade-in py-10">
-            <div class="w-20 h-20 bg-indigo-500/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-indigo-500/20 shadow-inner">
-              <svg class="w-10 h-10 text-indigo-400 animate-float" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h2 class="text-white font-black text-xl mb-2 uppercase italic tracking-tight">Siap Melayani</h2>
-            <p class="text-slate-400 text-sm font-medium max-w-[200px] mx-auto leading-relaxed">Pilih salah satu layanan di atas untuk memulai perhitungan</p>
+        ` : ''}
+
+        <!-- Popular Tools Section -->
+        <div class="section-container animate-fade-in">
+          <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
+            <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+            Paling Dicari
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+            ${popularCalculators.map(c => `
+              <button class="tool-card flex-col items-start p-5 popular-trigger group" data-id="${c.id}">
+                <div class="tool-icon-wrapper mb-4 group-hover:bg-red-500 group-hover:text-white transition-colors">
+                  ${getCategoryIcon(c.category)}
+                </div>
+                <h4 class="font-bold text-black/50 text-xs leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
+              </button>
+            `).join('')}
           </div>
-          <div id="calculator-container" class="w-full hidden"></div>
         </div>
 
-        <footer class="mt-8 marquee-container">
-          <p class="animate-marquee text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">
-            Dibuat dengan ❤️ untuk Warga Indonesia • Digital Assistant v2.0 • Layanan Cepat & Akurat • 2026
-          </p>
-        </footer>
+        <!-- Grouped List Section -->
+        <div id="tools-list-container" class="space-y-10">
+          ${groupedCalculators.map(group => `
+            <div class="category-section animate-fade-in" data-category="${group.name.toLowerCase()}">
+              <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
+                <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                ${group.name}
+              </h3>
+              <div class="space-y-4">
+                ${group.tools.map(c => `
+                  <button class="tool-card w-full text-left tool-item-trigger group" data-id="${c.id}" data-name="${c.name.toLowerCase()}">
+                    <div class="tool-icon-wrapper group-hover:bg-red-500 group-hover:text-white transition-colors">
+                      ${getCategoryIcon(c.category)}
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-bold text-black/50 text-sm group-hover:text-red-600 transition-colors">${c.name}</h4>
+                      <p class="text-[10px] text-black/30 font-bold uppercase tracking-tight">${c.category}</p>
+                    </div>
+                    <svg class="w-4 h-4 text-slate-300 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </main>
+
+      <footer class="py-8 text-center border-t border-slate-100 bg-white">
+        <p class="text-[10px] text-black/30 font-black uppercase tracking-[0.3em]">
+          Digital Assistant v2.1 • 2026
+        </p>
+      </footer>
     </div>
   `;
 
-  const trigger = document.getElementById('dropdown-trigger')!;
-  const panel = document.getElementById('dropdown-panel')!;
-  const searchInput = document.getElementById('search-input') as HTMLInputElement;
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-  const selectedLabel = document.getElementById('selected-label')!;
-  const display = document.getElementById('tool-display')!;
-  const placeholder = document.getElementById('placeholder')!;
-  const container = document.getElementById('calculator-container')!;
-  const lastToolHint = document.getElementById('last-tool-hint')!;
-  const lastToolBtn = document.getElementById('last-tool-btn')!;
-  const lastToolName = document.getElementById('last-tool-name')!;
+  const copywritingView = document.getElementById('copywriting-view')!;
+  const activeToolView = document.getElementById('active-tool-view')!;
+  const activeToolContent = document.getElementById('active-tool-content')!;
+  const activeToolName = document.getElementById('active-tool-name')!;
+  const activeToolDesc = document.getElementById('active-tool-desc')!;
+  const activeToolCat = document.getElementById('active-tool-cat')!;
+  const closeToolBtn = document.getElementById('close-tool')!;
+  const headerSearchToggle = document.getElementById('header-search-toggle')!;
+  const headerSearchInput = document.getElementById('header-search-input') as HTMLInputElement;
+
+  const heroSection = document.getElementById('hero-section')!;
 
   const showCalculator = (calc: any) => {
-    selectedLabel.textContent = calc.name;
-    panel.classList.add('hidden');
+    // window.scrollTo({ top: 0, behavior: 'smooth' }); // Removed as per request
+    heroSection.classList.add('sticky', 'top-14', 'z-[90]');
+    copywritingView.classList.add('hidden');
+    activeToolView.classList.remove('hidden');
     
-    // Update active state
-    dropdownItems.forEach(i => i.classList.remove('active'));
-    const activeItem = document.querySelector(`.dropdown-item[data-id="${calc.id}"]`);
-    if (activeItem) activeItem.classList.add('active');
-
-    placeholder.classList.add('hidden');
-    container.classList.remove('hidden');
-    container.innerHTML = `
-      <div class="animate-fade-in">
-        <div class="mb-5 pb-4 border-b border-[#222235]">
-          <div class="flex items-center justify-between gap-4">
-            <h2 class="text-xl font-bold text-white leading-tight">${calc.name}</h2>
-            <span class="shrink-0 text-[9px] font-bold bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded-full uppercase tracking-widest">${calc.category}</span>
-          </div>
-          <p class="text-[12px] text-[#8e8e9e] mt-2 leading-relaxed">${calc.description}</p>
-        </div>
-        <div id="calc-inner"></div>
-      </div>
-    `;
-    const inner = document.getElementById('calc-inner')!;
-    calc.render(inner);
-
-    // Save to last tool (only if different from current)
-    const currentLastId = localStorage.getItem('last_tool_id');
-    if (currentLastId && currentLastId !== calc.id) {
-      localStorage.setItem('prev_tool_id', currentLastId);
-      localStorage.setItem('prev_tool_name', localStorage.getItem('last_tool_name') || '');
-    }
+    activeToolName.textContent = calc.name;
+    activeToolDesc.textContent = calc.description;
+    activeToolCat.textContent = calc.category;
+    activeToolContent.innerHTML = '';
+    calc.render(activeToolContent);
     
     localStorage.setItem('last_tool_id', calc.id);
-    localStorage.setItem('last_tool_name', calc.name);
-    updateLastToolHint(true);
   };
 
-  const updateLastToolHint = (isCalcActive: boolean = false) => {
-    const prevId = localStorage.getItem('prev_tool_id');
-    const prevName = localStorage.getItem('prev_tool_name');
-    
-    // Only show if a calculator is active and we have a previous tool
-    if (isCalcActive && prevId && prevName) {
-      lastToolName.textContent = prevName;
-      lastToolHint.classList.remove('hidden');
+  const hideCalculator = () => {
+    heroSection.classList.remove('sticky', 'top-14', 'z-50');
+    activeToolView.classList.add('hidden');
+    copywritingView.classList.remove('hidden');
+    // Refresh to update last tool
+    renderHome();
+  };
+
+  closeToolBtn.onclick = hideCalculator;
+
+  // Header Search Toggle
+  headerSearchToggle.addEventListener('click', () => {
+    if (headerSearchInput.classList.contains('w-40')) {
+      headerSearchInput.classList.remove('w-40', 'opacity-100', 'px-3', 'mr-2');
+      headerSearchInput.classList.add('w-0', 'opacity-0', 'px-0');
+      headerSearchInput.value = '';
+      headerSearchInput.dispatchEvent(new Event('input'));
+      headerSearchInput.blur();
     } else {
-      lastToolHint.classList.add('hidden');
+      headerSearchInput.classList.remove('w-0', 'opacity-0', 'px-0');
+      headerSearchInput.classList.add('w-40', 'opacity-100', 'px-3', 'mr-2');
+      headerSearchInput.focus();
     }
-  };
-
-  updateLastToolHint(false);
-
-  lastToolBtn.addEventListener('click', () => {
-    const prevId = localStorage.getItem('prev_tool_id');
-    const calc = normalizedCalculators.find(c => c.id === prevId);
-    if (calc) showCalculator(calc);
   });
 
-  // Toggle dropdown
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    panel.classList.toggle('hidden');
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', () => {
-    panel.classList.add('hidden');
+  headerSearchInput.addEventListener('blur', () => {
+    if (headerSearchInput.value === '') {
+      headerSearchInput.classList.remove('w-40', 'opacity-100', 'px-3', 'mr-2');
+      headerSearchInput.classList.add('w-0', 'opacity-0', 'px-0');
+    }
   });
 
   // Search logic
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
+  headerSearchInput.addEventListener('input', () => {
+    const query = headerSearchInput.value.toLowerCase();
+    const toolItems = document.querySelectorAll('.tool-item-trigger');
+    const categorySections = document.querySelectorAll('.category-section');
+    const otherSections = document.querySelectorAll('.section-container');
+    const heroSection = document.getElementById('hero-section')!;
     
-    document.querySelectorAll('.category-group').forEach(group => {
-      const g = group as HTMLElement;
-      let groupHasMatch = false;
-      
-      g.querySelectorAll('.dropdown-item').forEach(item => {
-        const i = item as HTMLElement;
-        const name = i.getAttribute('data-name') || '';
+    if (query.length > 0) {
+      // Hide other sections when searching
+      otherSections.forEach(sec => sec.classList.add('hidden'));
+      if (heroSection) heroSection.classList.add('hidden');
+    } else {
+      // Show all sections when search is empty
+      otherSections.forEach(sec => sec.classList.remove('hidden'));
+      if (heroSection) heroSection.classList.remove('hidden');
+    }
+
+    categorySections.forEach(section => {
+      const tools = section.querySelectorAll('.tool-item-trigger');
+      let hasVisibleTool = false;
+
+      tools.forEach(item => {
+        const el = item as HTMLElement;
+        const name = el.getAttribute('data-name') || '';
         if (name.includes(query)) {
-          i.classList.remove('hidden');
-          groupHasMatch = true;
+          el.classList.remove('hidden');
+          hasVisibleTool = true;
         } else {
-          i.classList.add('hidden');
+          el.classList.add('hidden');
         }
       });
 
-      if (groupHasMatch) {
-        g.classList.remove('hidden');
+      if (hasVisibleTool) {
+        section.classList.remove('hidden');
       } else {
-        g.classList.add('hidden');
+        section.classList.add('hidden');
       }
     });
   });
 
-  // Item selection
-  dropdownItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const id = item.getAttribute('data-id');
+  // Triggers
+  document.querySelectorAll('.tool-item-trigger, .popular-trigger, .last-tool-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
       const calc = normalizedCalculators.find(c => c.id === id);
       if (calc) showCalculator(calc);
     });
   });
 }
+
+
 
 function renderCalculator(calc: Calculator) {
   // This function is now handled by showCalculator inside renderHome

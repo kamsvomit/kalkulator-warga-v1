@@ -10,10 +10,10 @@ export function playSound(type: 'success' | 'error') {
 
 export function createInput(label: string, id: string, type: string = 'number', placeholder: string = ''): { wrapper: HTMLElement, input: HTMLInputElement } {
   const wrapper = document.createElement('div');
-  wrapper.className = 'mb-4';
+  wrapper.className = 'mb-3';
   
   const labelEl = document.createElement('label');
-  labelEl.className = 'block text-[11px] font-bold text-indigo-300 uppercase tracking-widest mb-2 px-1';
+  labelEl.className = 'block text-[11px] font-bold text-black/40 uppercase tracking-widest mb-2 px-1';
   labelEl.textContent = label;
   labelEl.setAttribute('for', id);
   
@@ -21,7 +21,7 @@ export function createInput(label: string, id: string, type: string = 'number', 
   input.id = id;
   input.type = type === 'number' ? 'text' : type;
   input.placeholder = placeholder;
-  input.className = 'w-full px-4 py-3 input-3d rounded-xl text-sm font-medium text-white transition-all outline-none';
+  input.className = 'w-full px-4 py-3 input-3d rounded-2xl text-sm font-medium text-black/50 transition-all outline-none';
   
   if (type === 'number') {
     input.inputMode = 'numeric';
@@ -45,19 +45,19 @@ export function createInput(label: string, id: string, type: string = 'number', 
 export function createButton(text: string, className: string = 'btn-3d'): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.textContent = text;
-  btn.className = `px-6 py-3 rounded-xl font-bold transition-all active:scale-95 text-xs uppercase tracking-widest inline-flex items-center justify-center ${className}`;
+  btn.className = `px-6 py-2.5 rounded-xl font-bold transition-all active:scale-95 text-xs uppercase tracking-widest inline-flex items-center justify-center ${className}`;
   return btn;
 }
 
-export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElement } {
+export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElement, showError: (msg: string) => void, showResult: (val: string) => void } {
   const wrapper = document.createElement('div');
-  wrapper.className = 'mt-8 p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl hidden animate-fade-in shadow-inner relative group';
+  wrapper.className = 'mt-6 p-5 bg-red-50 border border-red-100 rounded-2xl hidden animate-fade-in relative group';
   
   const header = document.createElement('div');
   header.className = 'flex items-center justify-between mb-3';
 
   const title = document.createElement('h3');
-  title.className = 'text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em]';
+  title.className = 'text-[10px] font-black text-red-500 uppercase tracking-[0.2em]';
   title.textContent = 'Hasil Perhitungan';
   
   const shareBtn = document.createElement('button');
@@ -94,12 +94,34 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
   header.appendChild(shareBtn);
   
   const display = document.createElement('div');
-  display.className = 'text-xl sm:text-2xl font-black text-white tracking-tight';
+  display.className = 'text-2xl font-black text-black/50 tracking-tight';
   
   wrapper.appendChild(header);
   wrapper.appendChild(display);
   
-  return { wrapper, display };
+  const showError = (msg: string) => {
+    wrapper.classList.remove('hidden');
+    wrapper.classList.add('bg-red-50', 'border-red-100');
+    title.textContent = '⚠️ Error';
+    title.classList.add('text-red-500');
+    display.textContent = msg;
+    display.className = 'text-sm font-bold text-red-600';
+    shareBtn.classList.add('hidden');
+  };
+
+  const showResult = (val: string) => {
+    wrapper.classList.remove('hidden');
+    wrapper.classList.remove('bg-red-50', 'border-red-100');
+    wrapper.classList.add('bg-red-50', 'border-red-100');
+    title.textContent = 'Hasil Perhitungan';
+    title.classList.remove('text-red-500');
+    title.classList.add('text-red-500');
+    display.textContent = val;
+    display.className = 'text-2xl font-black text-black/50 tracking-tight';
+    shareBtn.classList.remove('hidden');
+  };
+
+  return { wrapper, display, showError, showResult };
 }
 
 export function parseValue(val: string): number {
@@ -112,4 +134,22 @@ export function formatCurrency(value: number): string {
 
 export function formatNumber(value: number, decimals: number = 2): string {
   return value.toLocaleString('id-ID', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+export function setupEnterKeyNavigation(container: HTMLElement, onFinalEnter: () => void) {
+  const inputs = Array.from(container.querySelectorAll('input')) as HTMLInputElement[];
+  
+  inputs.forEach((input, index) => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        } else {
+          input.blur(); // Hide keyboard
+          onFinalEnter();
+        }
+      }
+    });
+  });
 }
