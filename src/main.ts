@@ -209,31 +209,18 @@ function renderHome() {
               <h2 id="active-tool-name" class="text-xl font-black text-black/80 mb-1.5"></h2>
               <p id="active-tool-desc" class="text-xs text-black/40 mb-8 font-medium leading-relaxed"></p>
               <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-slate-100"></div>
+              
+              <!-- Last Tool Info (Moved here) -->
+              <div id="last-tool-info" class="mt-8 pt-6 border-t border-slate-100 hidden">
+                <p class="text-[10px] font-black text-black/20 uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
+                <button id="last-tool-link" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors flex items-center gap-2 group">
+                  <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                  <span id="last-tool-link-text"></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Last Tool Section -->
-        ${lastTool ? `
-          <div class="section-container animate-fade-in">
-            <h3 class="text-[10px] font-black text-black/30 uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
-              <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-              Terakhir Digunakan
-            </h3>
-            <button class="tool-card w-full text-left last-tool-trigger group" data-id="${lastTool.id}">
-              <div class="tool-icon-wrapper group-hover:bg-red-500 group-hover:text-white transition-colors">
-                ${getCategoryIcon(lastTool.category)}
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-black/50 text-sm group-hover:text-red-600 transition-colors">${lastTool.name}</h4>
-                <p class="text-[10px] text-black/30 font-bold uppercase tracking-tight">${lastTool.category}</p>
-              </div>
-              <svg class="w-5 h-5 text-slate-300 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
-          </div>
-        ` : ''}
 
         <!-- Popular Tools Section (Carousel) -->
         <div class="section-container animate-fade-in overflow-hidden">
@@ -311,6 +298,9 @@ function renderHome() {
   const activeToolDesc = document.getElementById('active-tool-desc')!;
   const activeToolCat = document.getElementById('active-tool-cat')!;
   const closeToolBtn = document.getElementById('close-tool')!;
+  const lastToolInfo = document.getElementById('last-tool-info')!;
+  const lastToolLink = document.getElementById('last-tool-link')!;
+  const lastToolLinkText = document.getElementById('last-tool-link-text')!;
   const headerSearchToggle = document.getElementById('header-search-toggle')!;
   const headerSearchInput = document.getElementById('header-search-input') as HTMLInputElement;
 
@@ -337,6 +327,21 @@ function renderHome() {
     activeToolCat.textContent = calc.category;
     activeToolContent.innerHTML = '';
     calc.render(activeToolContent);
+    
+    // Update Last Tool Info
+    const lastId = localStorage.getItem('last_tool_id');
+    if (lastId && lastId !== calc.id) {
+      const last = normalizedCalculators.find(c => c.id === lastId);
+      if (last) {
+        lastToolInfo.classList.remove('hidden');
+        lastToolLinkText.textContent = `Kembali ke ${last.name}`;
+        lastToolLink.onclick = () => showCalculator(last);
+      } else {
+        lastToolInfo.classList.add('hidden');
+      }
+    } else {
+      lastToolInfo.classList.add('hidden');
+    }
     
     localStorage.setItem('last_tool_id', calc.id);
   };
