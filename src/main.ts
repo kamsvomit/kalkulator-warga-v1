@@ -341,8 +341,8 @@ function renderHome() {
         </div>
 
         <footer class="py-12 text-center border-t border-arsenic/10">
-          <p class="text-[6px] text-arsenic font-black uppercase tracking-[0.3em]">
-            Made With ❤️ In Bandung • Frameless Inc 2026
+          <p class="text-[10px] text-arsenic font-black uppercase tracking-[0.3em]">
+            Digital Assistant v2.1 • 2026
           </p>
         </footer>
       </main>
