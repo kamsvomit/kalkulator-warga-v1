@@ -153,15 +153,22 @@ body {
 }
 
 /* Custom scrollbar - Hidden but scrollable */
-html, body, #app, * {
+* {
   scrollbar-width: none !important;
+  scrollbar-color: transparent transparent !important;
   -ms-overflow-style: none !important;
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar,
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
 }
 
 /* Fix potential white line on right */
