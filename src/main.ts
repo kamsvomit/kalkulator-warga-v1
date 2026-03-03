@@ -83,21 +83,70 @@ async function init() {
   }, 1000);
 }
 
-function getCategoryIcon(category: string): string {
-  switch (category) {
-    case 'Keuangan': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-    case 'Bisnis': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>';
-    case 'Kesehatan': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>';
-    case 'Kehidupan Sehari-hari': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>';
-    case 'Belanja': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>';
-    case 'Produktivitas': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>';
-    case 'Matematika': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>';
-    case 'Konversi': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>';
-    case 'Kebugaran': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>';
-    case 'Rumah': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>';
-    case 'Utilitas': return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>';
-    default: return '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-  }
+function getToolIcon(toolId: string, category: string): { svg: string, color: string } {
+  const icons: Record<string, string> = {
+    // Keuangan
+    'gaji-bersih': '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>',
+    'cicilan-bulanan': '<rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line>',
+    'bunga-tabungan': '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>',
+    'pajak-ppn': '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>',
+    'persen': '<line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle>',
+    
+    // Bisnis
+    'hpp': '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path>',
+    'profit-jualan': '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>',
+    'diskon-persen': '<line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle>',
+    'target-hp': '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line>',
+    
+    // Kesehatan
+    'bmi': '<path d="M20.42 4.58a5 5 0 0 1 0 7.07l-7.07 7.07a1 1 0 0 1-1.42 0L4.86 11.65a5 5 0 0 1 7.07-7.07l.07.08.07-.08a5 5 0 0 1 7.07 0z"></path>',
+    'kalori-harian': '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.5 4 6.5 2 2 3 5.5 3 8.5a7 7 0 1 1-14 0c0-3 2.5-6 3.5-7 .5 1 1 2 1 3.5z"></path>',
+    
+    // Rumah
+    'listrik-bulanan': '<path d="M13 2L3 14h9v8l10-12h-9l10-10z"></path>',
+    'air-pdam': '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>',
+    
+    // Utilitas
+    'konsumsi-bensin': '<path d="M3 22L17 22L17 7L3 7L3 22Z"></path><path d="M17 7L19 7L21 9L21 15L19 17L17 17"></path><path d="M7 7L7 4L13 4L13 7"></path>',
+    'calculator10': '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>',
+    'calculator20': '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>',
+    'calculator30': '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>',
+    'calculator40': '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>',
+    'calculator50': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+    'calculator60': '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path>',
+    'calculator70': '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>',
+    'calculator80': '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>',
+    'calculator90': '<path d="M12 19l7-7 3 3-10 10L2 15l3-3 7 7zM12 5l7 7-3 3-4-4-4 4-3-3 7-7z"></path>',
+    'calculator100': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>',
+  };
+
+  const colors = [
+    'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 
+    'bg-purple-500', 'bg-pink-500', 'bg-indigo-500', 'bg-orange-500',
+    'bg-teal-500', 'bg-cyan-500', 'bg-emerald-500', 'bg-violet-500',
+    'bg-rose-500', 'bg-amber-500', 'bg-lime-500', 'bg-fuchsia-500'
+  ];
+
+  // Use a simple hash of the toolId to pick a color if not predefined
+  const colorIdx = toolId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
+  const color = colors[colorIdx];
+
+  // Fallback icon based on ID to ensure variety even if not in the list
+  const fallbackIcons = [
+    '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>',
+    '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line>',
+    '<path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path>',
+    '<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>',
+    '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>'
+  ];
+  const fallbackIdx = toolId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % fallbackIcons.length;
+
+  const svgPath = icons[toolId] || fallbackIcons[fallbackIdx];
+  
+  return {
+    svg: `<svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">${svgPath}</svg>`,
+    color
+  };
 }
 
 function renderHome() {
@@ -239,17 +288,19 @@ function renderHome() {
           <div id="popular-carousel-container" class="relative overflow-hidden">
             <div id="popular-carousel" class="flex transition-transform duration-700 ease-in-out">
               ${[0, 1, 2, 0].map((slideIdx, i) => `
-                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1" ${i === 3 ? 'data-clone="true"' : ''}>
-                  ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map((c, idx) => `
-                    <button class="tool-card flex-col items-start p-4 popular-trigger group w-full reveal" 
+                <div class="w-full flex-shrink-0 grid grid-cols-4 gap-4 px-1" ${i === 3 ? 'data-clone="true"' : ''}>
+                  ${popularCalculators.slice(slideIdx * 4, (slideIdx + 1) * 4).map((c, idx) => {
+                    const icon = getToolIcon(c.id, c.category);
+                    return `
+                    <button class="flex flex-col items-center gap-2 popular-trigger group reveal" 
                             style="transition-delay: ${idx * 50}ms"
                             data-id="${c.id}">
-                      <div class="tool-icon-wrapper mb-3 group-hover:bg-red-500 group-hover:text-white transition-colors">
-                        ${getCategoryIcon(c.category)}
+                      <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${icon.color} flex items-center justify-center border border-white/10 shadow-sm group-hover:scale-105 transition-transform">
+                        ${icon.svg}
                       </div>
-                      <h4 class="font-bold text-arsenic text-[11px] leading-tight group-hover:text-red-600 transition-colors">${c.name}</h4>
+                      <span class="text-[9px] sm:text-[10px] font-bold text-arsenic text-center leading-tight line-clamp-2">${c.name}</span>
                     </button>
-                  `).join('')}
+                  `}).join('')}
                 </div>
               `).join('')}
             </div>
@@ -257,30 +308,33 @@ function renderHome() {
         </div>
 
         <!-- Grouped List Section -->
-        <div id="tools-list-container" class="space-y-10">
-          ${groupedCalculators.map(group => `
-            <div class="category-section" data-category="${group.name.toLowerCase()}">
-              <h3 class="text-[10px] font-black text-arsenic uppercase tracking-widest mb-5 flex items-center gap-2 px-2">
-                <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-                ${group.name}
-              </h3>
-              <div class="space-y-4">
-                ${group.tools.map((c, idx) => `
-                  <button class="tool-card w-full text-left tool-item-trigger group reveal" 
+        <div id="tools-list-container" class="space-y-6">
+          ${groupedCalculators.map((group, gIdx) => `
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-arsenic/5 shadow-sm space-y-6 category-section" data-category="${group.name.toLowerCase()}">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm sm:text-base font-black text-arsenic">${group.name}</h3>
+                <button class="see-all-btn flex items-center gap-1 px-3 py-1.5 rounded-full border border-green-500/20 text-green-600 text-[10px] font-bold hover:bg-green-50 transition-colors"
+                        data-group-idx="${gIdx}">
+                  <span>Lihat semua</span>
+                  <svg class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+              </div>
+              <div id="group-grid-${gIdx}" class="grid grid-cols-4 gap-4 transition-all duration-500 overflow-hidden">
+                ${group.tools.map((c, idx) => {
+                  const icon = getToolIcon(c.id, c.category);
+                  const isHidden = idx >= 4;
+                  return `
+                  <button class="flex flex-col items-center gap-2 tool-item-trigger group reveal ${isHidden ? 'hidden' : ''}" 
                           style="transition-delay: ${idx * 50}ms"
                           data-id="${c.id}" data-name="${c.name.toLowerCase()}">
-                    <div class="tool-icon-wrapper group-hover:bg-red-500 group-hover:text-white transition-colors">
-                      ${getCategoryIcon(c.category)}
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${icon.color} flex items-center justify-center border border-white/10 shadow-sm group-hover:scale-105 transition-transform">
+                      ${icon.svg}
                     </div>
-                    <div class="flex-1">
-                      <h4 class="font-bold text-arsenic text-sm group-hover:text-red-600 transition-colors">${c.name}</h4>
-                      <p class="text-[10px] text-arsenic font-bold uppercase tracking-tight">${c.category}</p>
-                    </div>
-                    <svg class="w-4 h-4 text-arsenic group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
+                    <span class="text-[9px] sm:text-[10px] font-bold text-arsenic text-center leading-tight line-clamp-2">${c.name}</span>
                   </button>
-                `).join('')}
+                `}).join('')}
               </div>
             </div>
           `).join('')}
@@ -412,10 +466,10 @@ function renderHome() {
     }
 
     categorySections.forEach(section => {
-      const tools = section.querySelectorAll('.tool-item-trigger');
+      const tools = Array.from(section.querySelectorAll('.tool-item-trigger'));
       let hasVisibleTool = false;
 
-      tools.forEach(item => {
+      tools.forEach((item, idx) => {
         const el = item as HTMLElement;
         const name = el.getAttribute('data-name') || '';
         if (name.includes(query)) {
@@ -440,6 +494,35 @@ function renderHome() {
       const id = btn.getAttribute('data-id');
       const calc = normalizedCalculators.find(c => c.id === id);
       if (calc) showCalculator(calc);
+    });
+  });
+
+  // See All Toggle
+  document.querySelectorAll('.see-all-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gIdx = btn.getAttribute('data-group-idx');
+      const grid = document.getElementById(`group-grid-${gIdx}`);
+      const tools = grid?.querySelectorAll('.tool-item-trigger');
+      const icon = btn.querySelector('svg');
+      const text = btn.querySelector('span');
+
+      if (grid?.classList.contains('showing-all')) {
+        grid.classList.remove('showing-all');
+        tools?.forEach((tool, idx) => {
+          if (idx >= 4) {
+            tool.classList.add('hidden');
+          }
+        });
+        if (icon) icon.style.transform = 'rotate(0deg)';
+        if (text) text.textContent = 'Lihat semua';
+      } else {
+        grid?.classList.add('showing-all');
+        tools?.forEach(tool => {
+          tool.classList.remove('hidden');
+        });
+        if (icon) icon.style.transform = 'rotate(90deg)';
+        if (text) text.textContent = 'Sembunyikan';
+      }
     });
   });
 
