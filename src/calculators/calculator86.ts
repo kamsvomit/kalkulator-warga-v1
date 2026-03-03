@@ -2,16 +2,16 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
 
 export const calculator86: Calculator = {
-  name: 'Tip Calculator',
+  name: 'Kalkulator Tip',
   id: 'tip-calc',
-  description: 'Calculate tip and total bill per person.',
-  category: 'Misc',
+  description: 'Hitung tip dan total tagihan per orang.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: bWrap, input: bInput } = createInput('Bill Amount ($)', 'bill', 'number');
-    const { wrapper: tWrap, input: tInput } = createInput('Tip Percentage (%)', 'tip', 'number', '15');
-    const { wrapper: pWrap, input: pInput } = createInput('Number of People', 'people', 'number', '1');
+    const { wrapper: bWrap, input: bInput } = createInput('Jumlah Tagihan (Rp)', 'bill', 'number');
+    const { wrapper: tWrap, input: tInput } = createInput('Persentase Tip (%)', 'tip', 'number', '15');
+    const { wrapper: pWrap, input: pInput } = createInput('Jumlah Orang', 'people', 'number', '1');
     
-    const calcBtn = createButton('Calculate');
+    const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -34,7 +34,7 @@ export const calculator86: Calculator = {
         
         resDisplay.innerHTML = `
           <div>Total: ${formatCurrency(total)}</div>
-          <div class="text-sm text-gray-500 mt-1">Per Person: ${formatCurrency(perPerson)}</div>
+          <div class="text-sm text-gray-500 mt-1">Per Orang: ${formatCurrency(perPerson)}</div>
           <div class="text-sm text-gray-500">Tip: ${formatCurrency(tipAmount)}</div>
         `;
         resWrap.classList.remove('hidden');

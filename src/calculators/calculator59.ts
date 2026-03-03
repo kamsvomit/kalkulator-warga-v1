@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator59: Calculator = {
-  name: 'Gram to Ounce Calculator',
+  name: 'Kalkulator Gram ke Ons',
   id: 'g-to-oz',
-  description: 'Convert grams to ounces.',
-  category: 'Conversion',
+  description: 'Konversi gram ke ons (ounces).',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: gWrap, input: gInput } = createInput('Grams', 'grams', 'number');
+    const { wrapper: gWrap, input: gInput } = createInput('Gram', 'grams', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator59: Calculator = {
       const g = parseFloat(gInput.value);
       if (!isNaN(g)) {
         const oz = g * 0.035274;
-        resDisplay.textContent = `${oz.toFixed(2)} Ounces`;
+        resDisplay.textContent = `${oz.toFixed(2)} Ons (Oz)`;
         resWrap.classList.remove('hidden');
       }
     };

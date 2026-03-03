@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator56: Calculator = {
-  name: 'CM to Inch Calculator',
+  name: 'Kalkulator CM ke Inci',
   id: 'cm-to-in',
-  description: 'Convert centimeters to inches.',
-  category: 'Conversion',
+  description: 'Konversi sentimeter ke inci.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: cWrap, input: cInput } = createInput('Centimeters', 'cm', 'number');
+    const { wrapper: cWrap, input: cInput } = createInput('Sentimeter', 'cm', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator56: Calculator = {
       const cm = parseFloat(cInput.value);
       if (!isNaN(cm)) {
         const inch = cm / 2.54;
-        resDisplay.textContent = `${inch.toFixed(2)} Inches`;
+        resDisplay.textContent = `${inch.toFixed(2)} Inci`;
         resWrap.classList.remove('hidden');
       }
     };

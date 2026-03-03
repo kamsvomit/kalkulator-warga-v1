@@ -2,17 +2,17 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator82: Calculator = {
-  name: 'Wallpaper Calculator',
+  name: 'Kalkulator Wallpaper',
   id: 'wallpaper-calc',
-  description: 'Estimate how many rolls of wallpaper you need.',
-  category: 'Home',
+  description: 'Estimasi berapa banyak gulungan wallpaper yang Anda butuhkan.',
+  category: 'Rumah',
   render(container) {
-    const { wrapper: wWrap, input: wInput } = createInput('Wall Width (m)', 'width', 'number');
-    const { wrapper: hWrap, input: hInput } = createInput('Wall Height (m)', 'height', 'number');
-    const { wrapper: rwWrap, input: rwInput } = createInput('Roll Width (m)', 'rwidth', 'number', '0.53');
-    const { wrapper: rlWrap, input: rlInput } = createInput('Roll Length (m)', 'rlength', 'number', '10');
+    const { wrapper: wWrap, input: wInput } = createInput('Lebar Dinding (m)', 'width', 'number');
+    const { wrapper: hWrap, input: hInput } = createInput('Tinggi Dinding (m)', 'height', 'number');
+    const { wrapper: rwWrap, input: rwInput } = createInput('Lebar Gulungan (m)', 'rwidth', 'number', '0.53');
+    const { wrapper: rlWrap, input: rlInput } = createInput('Panjang Gulungan (m)', 'rlength', 'number', '10');
     
-    const calcBtn = createButton('Calculate');
+    const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -34,7 +34,7 @@ export const calculator82: Calculator = {
         const wallArea = w * h;
         const rollArea = rw * rl;
         const rolls = wallArea / rollArea;
-        resDisplay.textContent = `${Math.ceil(rolls * 1.1)} Rolls (incl. 10% waste)`;
+        resDisplay.textContent = `${Math.ceil(rolls * 1.1)} Gulungan (termasuk 10% sisa)`;
         resWrap.classList.remove('hidden');
       }
     };

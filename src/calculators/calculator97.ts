@@ -2,16 +2,16 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator97: Calculator = {
-  name: 'Recipe Scaler',
+  name: 'Pengubah Skala Resep',
   id: 'recipe-scaler',
-  description: 'Scale recipe ingredients based on desired servings.',
-  category: 'Daily Life',
+  description: 'Ubah takaran bahan resep berdasarkan jumlah porsi yang diinginkan.',
+  category: 'Kehidupan Sehari-hari',
   render(container) {
-    const { wrapper: oWrap, input: oInput } = createInput('Original Servings', 'orig', 'number');
-    const { wrapper: nWrap, input: nInput } = createInput('Desired Servings', 'new', 'number');
-    const { wrapper: iWrap, input: iInput } = createInput('Ingredient Amount', 'amt', 'number');
+    const { wrapper: oWrap, input: oInput } = createInput('Porsi Asli', 'orig', 'number');
+    const { wrapper: nWrap, input: nInput } = createInput('Porsi yang Diinginkan', 'new', 'number');
+    const { wrapper: iWrap, input: iInput } = createInput('Jumlah Bahan', 'amt', 'number');
     
-    const calcBtn = createButton('Scale');
+    const calcBtn = createButton('Ubah Skala');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -29,7 +29,7 @@ export const calculator97: Calculator = {
       
       if (orig > 0 && desired > 0 && amt > 0) {
         const res = (amt / orig) * desired;
-        resDisplay.textContent = `New Amount: ${res.toFixed(2)}`;
+        resDisplay.textContent = `Jumlah Baru: ${res.toFixed(2)}`;
         resWrap.classList.remove('hidden');
       }
     };

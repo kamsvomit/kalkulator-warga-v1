@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator78: Calculator = {
-  name: 'Max Heart Rate Calculator',
+  name: 'Kalkulator Detak Jantung Maksimal',
   id: 'max-hr',
-  description: 'Estimate your maximum heart rate based on age.',
-  category: 'Fitness',
+  description: 'Estimasi detak jantung maksimal Anda berdasarkan usia.',
+  category: 'Kebugaran',
   render(container) {
-    const { wrapper: aWrap, input: aInput } = createInput('Age', 'age', 'number');
+    const { wrapper: aWrap, input: aInput } = createInput('Usia', 'age', 'number');
     
-    const calcBtn = createButton('Calculate');
+    const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator78: Calculator = {
       const age = parseFloat(aInput.value);
       if (age > 0) {
         const maxHr = 220 - age;
-        resDisplay.textContent = `${maxHr} BPM`;
+        resDisplay.textContent = `${maxHr} BPM (Detak per Menit)`;
         resWrap.classList.remove('hidden');
       }
     };

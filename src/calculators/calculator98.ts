@@ -2,15 +2,15 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator98: Calculator = {
-  name: 'Grade Calculator',
+  name: 'Kalkulator Nilai Akhir',
   id: 'grade-calc',
-  description: 'Calculate weighted final grade.',
-  category: 'Misc',
+  description: 'Hitung nilai akhir berbobot.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: gWrap, input: gInput } = createInput('Grades (%) (comma separated)', 'grades', 'text', '80, 90, 70');
-    const { wrapper: wWrap, input: wInput } = createInput('Weights (%) (comma separated)', 'weights', 'text', '30, 40, 30');
+    const { wrapper: gWrap, input: gInput } = createInput('Nilai (%) (pisahkan dengan koma)', 'grades', 'text', '80, 90, 70');
+    const { wrapper: wWrap, input: wInput } = createInput('Bobot (%) (pisahkan dengan koma)', 'weights', 'text', '30, 40, 30');
     
-    const calcBtn = createButton('Calculate Grade');
+    const calcBtn = createButton('Hitung Nilai');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -31,7 +31,7 @@ export const calculator98: Calculator = {
           total += (grades[i] * weights[i]) / 100;
           totalWeight += weights[i];
         }
-        resDisplay.textContent = `Final Grade: ${total.toFixed(2)}%`;
+        resDisplay.textContent = `Nilai Akhir: ${total.toFixed(2)}%`;
         resWrap.classList.remove('hidden');
       }
     };

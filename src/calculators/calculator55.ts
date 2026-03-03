@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator55: Calculator = {
-  name: 'Inch to CM Calculator',
+  name: 'Kalkulator Inci ke CM',
   id: 'in-to-cm',
-  description: 'Convert inches to centimeters.',
-  category: 'Conversion',
+  description: 'Konversi inci ke sentimeter.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: iWrap, input: iInput } = createInput('Inches', 'inches', 'number');
+    const { wrapper: iWrap, input: iInput } = createInput('Inci', 'inches', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

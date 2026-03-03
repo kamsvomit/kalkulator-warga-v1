@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator67: Calculator = {
-  name: 'Cup to ML Calculator',
+  name: 'Kalkulator Cup ke ML',
   id: 'cup-to-ml',
-  description: 'Convert US cups to milliliters.',
-  category: 'Conversion',
+  description: 'Konversi cup (US) ke mililiter.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: cWrap, input: cInput } = createInput('Cups', 'cups', 'number');
+    const { wrapper: cWrap, input: cInput } = createInput('Cup', 'cups', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator74: Calculator = {
-  name: 'Knot to KMH Calculator',
+  name: 'Kalkulator Knot ke KM/jam',
   id: 'knot-to-kmh',
-  description: 'Convert knots to kilometers per hour.',
-  category: 'Conversion',
+  description: 'Konversi knot ke kilometer per jam.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: kWrap, input: kInput } = createInput('Knots', 'knots', 'number');
+    const { wrapper: kWrap, input: kInput } = createInput('Knot', 'knots', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator74: Calculator = {
       const knot = parseFloat(kInput.value);
       if (!isNaN(knot)) {
         const kmh = knot * 1.852;
-        resDisplay.textContent = `${kmh.toFixed(1)} KM/H`;
+        resDisplay.textContent = `${kmh.toFixed(1)} KM/jam`;
         resWrap.classList.remove('hidden');
       }
     };

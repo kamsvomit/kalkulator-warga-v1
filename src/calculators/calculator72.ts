@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator72: Calculator = {
-  name: 'KMH to MPH Calculator',
+  name: 'Kalkulator KM/jam ke MPH',
   id: 'kmh-to-mph',
-  description: 'Convert kilometers per hour to miles per hour.',
-  category: 'Conversion',
+  description: 'Konversi kilometer per jam ke mil per jam.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: kWrap, input: kInput } = createInput('KM/H', 'kmh', 'number');
+    const { wrapper: kWrap, input: kInput } = createInput('KM/jam', 'kmh', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

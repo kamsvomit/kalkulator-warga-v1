@@ -2,15 +2,15 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator88: Calculator = {
-  name: 'Random Number Generator',
+  name: 'Pembuat Angka Acak',
   id: 'random-gen',
-  description: 'Generate a random number between two values.',
-  category: 'Misc',
+  description: 'Buat angka acak di antara dua nilai.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: minWrap, input: minInput } = createInput('Min', 'min', 'number', '1');
-    const { wrapper: maxWrap, input: maxInput } = createInput('Max', 'max', 'number', '100');
+    const { wrapper: minWrap, input: minInput } = createInput('Minimal', 'min', 'number', '1');
+    const { wrapper: maxWrap, input: maxInput } = createInput('Maksimal', 'max', 'number', '100');
     
-    const calcBtn = createButton('Generate');
+    const calcBtn = createButton('Buat Angka');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -25,7 +25,7 @@ export const calculator88: Calculator = {
       const max = parseInt(maxInput.value) || 100;
       if (max > min) {
         const res = Math.floor(Math.random() * (max - min + 1)) + min;
-        resDisplay.textContent = `Result: ${res}`;
+        resDisplay.textContent = `Hasil: ${res}`;
         resWrap.classList.remove('hidden');
       }
     };

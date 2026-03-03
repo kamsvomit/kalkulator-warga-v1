@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator63: Calculator = {
-  name: 'Celsius to Kelvin',
+  name: 'Celsius ke Kelvin',
   id: 'c-to-k',
-  description: 'Convert Celsius to Kelvin.',
-  category: 'Conversion',
+  description: 'Konversi suhu Celsius ke Kelvin.',
+  category: 'Konversi',
   render(container) {
     const { wrapper: cWrap, input: cInput } = createInput('Celsius (°C)', 'celsius', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator64: Calculator = {
-  name: 'Liter to Gallon Calculator',
+  name: 'Kalkulator Liter ke Galon',
   id: 'l-to-gal',
-  description: 'Convert liters to US gallons.',
-  category: 'Conversion',
+  description: 'Konversi liter ke galon (US).',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: lWrap, input: lInput } = createInput('Liters', 'liters', 'number');
+    const { wrapper: lWrap, input: lInput } = createInput('Liter', 'liters', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator64: Calculator = {
       const l = parseFloat(lInput.value);
       if (!isNaN(l)) {
         const gal = l * 0.264172;
-        resDisplay.textContent = `${gal.toFixed(2)} Gallons`;
+        resDisplay.textContent = `${gal.toFixed(2)} Galon`;
         resWrap.classList.remove('hidden');
       }
     };

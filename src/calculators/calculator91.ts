@@ -2,18 +2,18 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
 
 export const calculator91: Calculator = {
-  name: 'Car Loan Calculator',
+  name: 'Kalkulator Kredit Mobil',
   id: 'car-loan',
-  description: 'Calculate monthly payments for a car loan.',
-  category: 'Finance',
+  description: 'Hitung cicilan bulanan untuk kredit mobil.',
+  category: 'Keuangan',
   render(container) {
-    const { wrapper: pWrap, input: pInput } = createInput('Car Price ($)', 'price', 'number');
-    const { wrapper: dWrap, input: dInput } = createInput('Down Payment ($)', 'down', 'number');
-    const { wrapper: tWrap, input: tInput } = createInput('Trade-in Value ($)', 'trade', 'number');
-    const { wrapper: rWrap, input: rInput } = createInput('Interest Rate (%)', 'rate', 'number', '5');
-    const { wrapper: mWrap, input: mInput } = createInput('Term (Months)', 'term', 'number', '60');
+    const { wrapper: pWrap, input: pInput } = createInput('Harga Mobil (Rp)', 'price', 'number');
+    const { wrapper: dWrap, input: dInput } = createInput('Uang Muka (Rp)', 'down', 'number');
+    const { wrapper: tWrap, input: tInput } = createInput('Nilai Tukar Tambah (Rp)', 'trade', 'number');
+    const { wrapper: rWrap, input: rInput } = createInput('Suku Bunga (%)', 'rate', 'number', '5');
+    const { wrapper: mWrap, input: mInput } = createInput('Jangka Waktu (Bulan)', 'term', 'number', '60');
     
-    const calcBtn = createButton('Calculate');
+    const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -36,7 +36,7 @@ export const calculator91: Calculator = {
       
       if (p > 0 && r > 0 && n > 0) {
         const monthly = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-        resDisplay.textContent = `Monthly Payment: ${formatCurrency(monthly)}`;
+        resDisplay.textContent = `Cicilan Bulanan: ${formatCurrency(monthly)}`;
         resWrap.classList.remove('hidden');
       }
     };

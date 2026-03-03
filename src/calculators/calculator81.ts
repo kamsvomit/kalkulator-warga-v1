@@ -2,16 +2,16 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator81: Calculator = {
-  name: 'Flooring Calculator',
+  name: 'Kalkulator Lantai',
   id: 'flooring-calc',
-  description: 'Calculate the amount of flooring material needed for a room.',
-  category: 'Home',
+  description: 'Hitung jumlah material lantai yang dibutuhkan untuk sebuah ruangan.',
+  category: 'Rumah',
   render(container) {
-    const { wrapper: lWrap, input: lInput } = createInput('Room Length (m)', 'length', 'number');
-    const { wrapper: wWrap, input: wInput } = createInput('Room Width (m)', 'width', 'number');
-    const { wrapper: w2Wrap, input: w2Input } = createInput('Wastage (%)', 'waste', 'number', '10');
+    const { wrapper: lWrap, input: lInput } = createInput('Panjang Ruangan (m)', 'length', 'number');
+    const { wrapper: wWrap, input: wInput } = createInput('Lebar Ruangan (m)', 'width', 'number');
+    const { wrapper: w2Wrap, input: w2Input } = createInput('Estimasi Sisa/Buang (%)', 'waste', 'number', '10');
     
-    const calcBtn = createButton('Calculate');
+    const calcBtn = createButton('Hitung');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -30,7 +30,7 @@ export const calculator81: Calculator = {
       if (l > 0 && w > 0) {
         const area = l * w;
         const total = area * (1 + waste / 100);
-        resDisplay.textContent = `${total.toFixed(2)} Sq M`;
+        resDisplay.textContent = `${total.toFixed(2)} m²`;
         resWrap.classList.remove('hidden');
       }
     };

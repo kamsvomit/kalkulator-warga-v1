@@ -2,29 +2,29 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator96: Calculator = {
-  name: 'Cooking Unit Converter',
+  name: 'Konversi Satuan Masak',
   id: 'cook-convert',
-  description: 'Convert between common cooking units (Tbsp, Tsp, Cup).',
-  category: 'Daily Life',
+  description: 'Konversi antara satuan masak umum (Sdt, Sdm, Cup).',
+  category: 'Kehidupan Sehari-hari',
   render(container) {
-    const { wrapper: vWrap, input: vInput } = createInput('Value', 'val', 'number');
+    const { wrapper: vWrap, input: vInput } = createInput('Nilai', 'val', 'number');
     const fromSelect = document.createElement('select');
     fromSelect.className = 'w-full px-3 py-2 border border-gray-300 rounded-md mb-2';
-    ['Tsp', 'Tbsp', 'Cup'].forEach(u => {
+    [{id: 'Tsp', name: 'Sdt (Sendok Teh)'}, {id: 'Tbsp', name: 'Sdm (Sendok Makan)'}, {id: 'Cup', name: 'Cup'}].forEach(u => {
       const opt = document.createElement('option');
-      opt.value = u; opt.textContent = u;
+      opt.value = u.id; opt.textContent = u.name;
       fromSelect.appendChild(opt);
     });
     
     const toSelect = document.createElement('select');
     toSelect.className = 'w-full px-3 py-2 border border-gray-300 rounded-md mb-4';
-    ['Tsp', 'Tbsp', 'Cup'].forEach(u => {
+    [{id: 'Tsp', name: 'Sdt (Sendok Teh)'}, {id: 'Tbsp', name: 'Sdm (Sendok Makan)'}, {id: 'Cup', name: 'Cup'}].forEach(u => {
       const opt = document.createElement('option');
-      opt.value = u; opt.textContent = u;
+      opt.value = u.id; opt.textContent = u.name;
       toSelect.appendChild(opt);
     });
 
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -43,7 +43,8 @@ export const calculator96: Calculator = {
       const to = toSelect.value;
       if (!isNaN(val)) {
         const res = (val * factors[from]) / factors[to];
-        resDisplay.textContent = `${res.toFixed(2)} ${to}`;
+        const unitName = to === 'Tsp' ? 'Sdt' : (to === 'Tbsp' ? 'Sdm' : 'Cup');
+        resDisplay.textContent = `${res.toFixed(2)} ${unitName}`;
         resWrap.classList.remove('hidden');
       }
     };

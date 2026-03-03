@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator58: Calculator = {
-  name: 'Lbs to KG Calculator',
+  name: 'Kalkulator Pon ke KG',
   id: 'lbs-to-kg',
-  description: 'Convert pounds to kilograms.',
-  category: 'Conversion',
+  description: 'Konversi pon (lbs) ke kilogram.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: lWrap, input: lInput } = createInput('Pounds', 'lbs', 'number');
+    const { wrapper: lWrap, input: lInput } = createInput('Pon (Lbs)', 'lbs', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

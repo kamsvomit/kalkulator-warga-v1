@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator61: Calculator = {
-  name: 'Celsius to Fahrenheit',
+  name: 'Celsius ke Fahrenheit',
   id: 'c-to-f',
-  description: 'Convert Celsius to Fahrenheit.',
-  category: 'Conversion',
+  description: 'Konversi suhu Celsius ke Fahrenheit.',
+  category: 'Konversi',
   render(container) {
     const { wrapper: cWrap, input: cInput } = createInput('Celsius (°C)', 'celsius', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 

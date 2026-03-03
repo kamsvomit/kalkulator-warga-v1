@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator89: Calculator = {
-  name: 'Password Strength Checker',
+  name: 'Cek Kekuatan Kata Sandi',
   id: 'password-strength',
-  description: 'Check the strength of a password.',
-  category: 'Misc',
+  description: 'Periksa seberapa kuat kata sandi Anda.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: pWrap, input: pInput } = createInput('Password', 'pass', 'text');
+    const { wrapper: pWrap, input: pInput } = createInput('Kata Sandi', 'pass', 'text');
     
-    const calcBtn = createButton('Check Strength');
+    const calcBtn = createButton('Cek Kekuatan');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -27,8 +27,8 @@ export const calculator89: Calculator = {
       if (/[0-9]/.test(pass)) score++;
       if (/[^A-Za-z0-9]/.test(pass)) score++;
       
-      const levels = ['Very Weak', 'Weak', 'Fair', 'Strong', 'Very Strong'];
-      resDisplay.textContent = levels[score - 1] || 'Very Weak';
+      const levels = ['Sangat Lemah', 'Lemah', 'Cukup', 'Kuat', 'Sangat Kuat'];
+      resDisplay.textContent = levels[score - 1] || 'Sangat Lemah';
       resWrap.classList.remove('hidden');
     };
 

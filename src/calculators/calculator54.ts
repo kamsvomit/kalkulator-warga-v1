@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator54: Calculator = {
-  name: 'Miles to KM Calculator',
+  name: 'Kalkulator Mil ke KM',
   id: 'mi-to-km',
-  description: 'Convert miles to kilometers.',
-  category: 'Conversion',
+  description: 'Konversi mil ke kilometer.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: mWrap, input: mInput } = createInput('Miles', 'miles', 'number');
+    const { wrapper: mWrap, input: mInput } = createInput('Mil', 'miles', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator54: Calculator = {
       const mi = parseFloat(mInput.value);
       if (!isNaN(mi)) {
         const km = mi / 0.621371;
-        resDisplay.textContent = `${km.toFixed(2)} Kilometers`;
+        resDisplay.textContent = `${km.toFixed(2)} Kilometer`;
         resWrap.classList.remove('hidden');
       }
     };

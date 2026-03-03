@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator99: Calculator = {
-  name: 'Binary to Decimal',
+  name: 'Biner ke Desimal',
   id: 'bin-to-dec',
-  description: 'Convert binary numbers to decimal.',
-  category: 'Math',
+  description: 'Konversi angka biner ke desimal.',
+  category: 'Matematika',
   render(container) {
-    const { wrapper: bWrap, input: bInput } = createInput('Binary Number', 'bin', 'text');
+    const { wrapper: bWrap, input: bInput } = createInput('Angka Biner', 'bin', 'text');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator99: Calculator = {
       const bin = bInput.value;
       if (/^[01]+$/.test(bin)) {
         const dec = parseInt(bin, 2);
-        resDisplay.textContent = `Decimal: ${dec}`;
+        resDisplay.textContent = `Desimal: ${dec}`;
         resWrap.classList.remove('hidden');
       }
     };

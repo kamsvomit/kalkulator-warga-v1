@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator71: Calculator = {
-  name: 'Hectare to Acre Calculator',
+  name: 'Kalkulator Hektar ke Akre',
   id: 'ha-to-acre',
-  description: 'Convert hectares to acres.',
-  category: 'Conversion',
+  description: 'Konversi hektar ke akre.',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: hWrap, input: hInput } = createInput('Hectares', 'ha', 'number');
+    const { wrapper: hWrap, input: hInput } = createInput('Hektar', 'ha', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator71: Calculator = {
       const ha = parseFloat(hInput.value);
       if (!isNaN(ha)) {
         const acre = ha / 0.404686;
-        resDisplay.textContent = `${acre.toFixed(2)} Acres`;
+        resDisplay.textContent = `${acre.toFixed(2)} Akre`;
         resWrap.classList.remove('hidden');
       }
     };

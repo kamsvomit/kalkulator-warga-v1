@@ -2,15 +2,15 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator79: Calculator = {
-  name: 'Running Pace Calculator',
+  name: 'Kalkulator Pace Lari',
   id: 'pace-calc',
-  description: 'Calculate your running pace based on distance and time.',
-  category: 'Fitness',
+  description: 'Hitung pace lari Anda berdasarkan jarak dan waktu.',
+  category: 'Kebugaran',
   render(container) {
-    const { wrapper: dWrap, input: dInput } = createInput('Distance (km)', 'dist', 'number');
-    const { wrapper: tWrap, input: tInput } = createInput('Time (HH:MM:SS)', 'time', 'text', '00:30:00');
+    const { wrapper: dWrap, input: dInput } = createInput('Jarak (km)', 'dist', 'number');
+    const { wrapper: tWrap, input: tInput } = createInput('Waktu (JJ:MM:DD)', 'time', 'text', '00:30:00');
     
-    const calcBtn = createButton('Calculate Pace');
+    const calcBtn = createButton('Hitung Pace');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -28,7 +28,7 @@ export const calculator79: Calculator = {
         const secPerKm = totalSec / dist;
         const min = Math.floor(secPerKm / 60);
         const sec = Math.round(secPerKm % 60);
-        resDisplay.textContent = `${min}:${sec.toString().padStart(2, '0')} min/km`;
+        resDisplay.textContent = `${min}:${sec.toString().padStart(2, '0')} menit/km`;
         resWrap.classList.remove('hidden');
       }
     };

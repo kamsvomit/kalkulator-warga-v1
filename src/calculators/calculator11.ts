@@ -7,7 +7,7 @@ export const calculator11: Calculator = {
   description: 'Hitung kewajiban zakat mal (2.5%) dari total harta Anda.',
   category: 'Keuangan',
   render(container) {
-    const { wrapper: hWrap, input: hInput } = createInput('Total Harta ($)', 'harta', 'number', 'Contoh: 100000000');
+    const { wrapper: hWrap, input: hInput } = createInput('Total Harta (Rp)', 'harta', 'number', 'Contoh: 100000000');
     const { wrapper: nWrap, input: nInput } = createInput('Harga Emas Saat Ini (per gram)', 'emas', 'number', 'Contoh: 1000000');
     
     const calcBtn = createButton('Hitung Zakat', 'btn-3d w-full mb-4');

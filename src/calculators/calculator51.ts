@@ -2,14 +2,14 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator51: Calculator = {
-  name: 'Meter to Feet Calculator',
+  name: 'Kalkulator Meter ke Kaki',
   id: 'm-to-ft',
-  description: 'Convert meters to feet.',
-  category: 'Conversion',
+  description: 'Konversi meter ke kaki (feet).',
+  category: 'Konversi',
   render(container) {
-    const { wrapper: mWrap, input: mInput } = createInput('Meters', 'meters', 'number');
+    const { wrapper: mWrap, input: mInput } = createInput('Meter', 'meters', 'number');
     
-    const calcBtn = createButton('Convert');
+    const calcBtn = createButton('Konversi');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -22,7 +22,7 @@ export const calculator51: Calculator = {
       const m = parseFloat(mInput.value);
       if (!isNaN(m)) {
         const ft = m * 3.28084;
-        resDisplay.textContent = `${ft.toFixed(2)} Feet`;
+        resDisplay.textContent = `${ft.toFixed(2)} Kaki`;
         resWrap.classList.remove('hidden');
       }
     };

@@ -2,16 +2,16 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
 
 export const calculator87: Calculator = {
-  name: 'Fuel Cost Calculator',
+  name: 'Kalkulator Biaya Bensin',
   id: 'fuel-cost',
-  description: 'Calculate the cost of fuel for a trip.',
-  category: 'Misc',
+  description: 'Hitung biaya bahan bakar untuk sebuah perjalanan.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: dWrap, input: dInput } = createInput('Distance (km)', 'dist', 'number');
-    const { wrapper: fWrap, input: fInput } = createInput('Fuel Efficiency (L/100km)', 'eff', 'number', '8');
-    const { wrapper: pWrap, input: pInput } = createInput('Fuel Price ($ per Liter)', 'price', 'number');
+    const { wrapper: dWrap, input: dInput } = createInput('Jarak (km)', 'dist', 'number');
+    const { wrapper: fWrap, input: fInput } = createInput('Konsumsi BBM (L/100km)', 'eff', 'number', '8');
+    const { wrapper: pWrap, input: pInput } = createInput('Harga BBM (Rp per Liter)', 'price', 'number');
     
-    const calcBtn = createButton('Calculate Cost');
+    const calcBtn = createButton('Hitung Biaya');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -30,7 +30,7 @@ export const calculator87: Calculator = {
       if (dist > 0 && price > 0) {
         const liters = (dist / 100) * eff;
         const cost = liters * price;
-        resDisplay.textContent = `Cost: ${formatCurrency(cost)}`;
+        resDisplay.textContent = `Biaya: ${formatCurrency(cost)}`;
         resWrap.classList.remove('hidden');
       }
     };

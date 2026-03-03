@@ -2,15 +2,15 @@ import { Calculator } from '../types';
 import { createInput, createButton, createResultDisplay } from '../utils';
 
 export const calculator85: Calculator = {
-  name: 'GPA Calculator',
+  name: 'Kalkulator IPK',
   id: 'gpa-calc',
-  description: 'Calculate your GPA based on grades and credits.',
-  category: 'Misc',
+  description: 'Hitung IPK Anda berdasarkan nilai dan SKS.',
+  category: 'Lainnya',
   render(container) {
-    const { wrapper: gWrap, input: gInput } = createInput('Grades (comma separated, 0-4)', 'grades', 'text', '4, 3.5, 3');
-    const { wrapper: cWrap, input: cInput } = createInput('Credits (comma separated)', 'credits', 'text', '3, 3, 4');
+    const { wrapper: gWrap, input: gInput } = createInput('Nilai (pisahkan dengan koma, 0-4)', 'grades', 'text', '4, 3.5, 3');
+    const { wrapper: cWrap, input: cInput } = createInput('SKS (pisahkan dengan koma)', 'credits', 'text', '3, 3, 4');
     
-    const calcBtn = createButton('Calculate GPA');
+    const calcBtn = createButton('Hitung IPK');
     const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
     const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
 
@@ -32,7 +32,7 @@ export const calculator85: Calculator = {
           totalCredits += credits[i];
         }
         const gpa = totalPoints / totalCredits;
-        resDisplay.textContent = `GPA: ${gpa.toFixed(2)}`;
+        resDisplay.textContent = `IPK: ${gpa.toFixed(2)}`;
         resWrap.classList.remove('hidden');
       }
     };
