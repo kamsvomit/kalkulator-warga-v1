@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay } from '../utils';
+import { createInput, createButton, createResultDisplay, setupEnterKeyNavigation } from '../utils';
 
 export const calculator95: Calculator = {
   name: 'Perbandingan Harga Satuan',
@@ -13,8 +13,8 @@ export const calculator95: Calculator = {
     const { wrapper: q2Wrap, input: q2Input } = createInput('Jumlah/Qty Produk 2', 'q2', 'number');
     
     const calcBtn = createButton('Bandingkan');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(p1Wrap);
     container.appendChild(q1Wrap);
@@ -33,8 +33,10 @@ export const calculator95: Calculator = {
       if (q1 > 0 && q2 > 0) {
         const u1 = p1 / q1;
         const u2 = p2 / q2;
-        resDisplay.textContent = u1 < u2 ? 'Produk 1 lebih murah' : (u1 > u2 ? 'Produk 2 lebih murah' : 'Keduanya sama');
-        resWrap.classList.remove('hidden');
+        const resultText = u1 < u2 ? 'Produk 1 lebih murah' : (u1 > u2 ? 'Produk 2 lebih murah' : 'Keduanya sama');
+        showResult(resultText);
+      } else {
+        showError('Harap masukkan jumlah yang valid (lebih dari 0).');
       }
     };
 
@@ -42,5 +44,7 @@ export const calculator95: Calculator = {
       p1Input.value = ''; q1Input.value = ''; p2Input.value = ''; q2Input.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

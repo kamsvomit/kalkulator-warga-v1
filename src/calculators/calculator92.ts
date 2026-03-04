@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay } from '../utils';
+import { createInput, createButton, createResultDisplay, setupEnterKeyNavigation } from '../utils';
 
 export const calculator92: Calculator = {
   name: 'Kalkulator Pelunasan Kartu Kredit',
@@ -12,8 +12,8 @@ export const calculator92: Calculator = {
     const { wrapper: mWrap, input: mInput } = createInput('Pembayaran Bulanan (Rp)', 'monthly', 'number');
     
     const calcBtn = createButton('Hitung');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(bWrap);
     container.appendChild(rWrap);
@@ -29,11 +29,11 @@ export const calculator92: Calculator = {
       
       if (b > 0 && m > b * r) {
         const months = -Math.log(1 - (b * r) / m) / Math.log(1 + r);
-        resDisplay.textContent = `${Math.ceil(months)} Bulan`;
-        resWrap.classList.remove('hidden');
-      } else if (m <= b * r) {
-        resDisplay.textContent = 'Pembayaran terlalu rendah untuk menutupi bunga';
-        resWrap.classList.remove('hidden');
+        showResult(`${Math.ceil(months)} Bulan`);
+      } else if (m <= b * r && b > 0) {
+        showError('Pembayaran terlalu rendah untuk menutupi bunga.');
+      } else {
+        showError('Harap masukkan saldo dan pembayaran yang valid.');
       }
     };
 
@@ -41,5 +41,7 @@ export const calculator92: Calculator = {
       bInput.value = ''; mInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

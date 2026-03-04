@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay } from '../utils';
+import { createInput, createButton, createResultDisplay, setupEnterKeyNavigation } from '../utils';
 
 export const calculator100: Calculator = {
   name: 'Desimal ke Biner',
@@ -10,8 +10,8 @@ export const calculator100: Calculator = {
     const { wrapper: dWrap, input: dInput } = createInput('Angka Desimal', 'dec', 'number');
     
     const calcBtn = createButton('Konversi');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(dWrap);
     container.appendChild(calcBtn);
@@ -19,11 +19,11 @@ export const calculator100: Calculator = {
     container.appendChild(resWrap);
 
     calcBtn.onclick = () => {
-      const dec = parseInt(dInput.value);
+      const dec = parseInt(dInput.value.replace(/\D/g, ''));
       if (!isNaN(dec)) {
-        const bin = dec.toString(2);
-        resDisplay.textContent = `Biner: ${bin}`;
-        resWrap.classList.remove('hidden');
+        showResult(dec.toString(2));
+      } else {
+        showError('Harap masukkan angka desimal yang valid.');
       }
     };
 
@@ -31,5 +31,7 @@ export const calculator100: Calculator = {
       dInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

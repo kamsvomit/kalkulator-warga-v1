@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, setupEnterKeyNavigation } from '../utils';
 
 export const calculator90: Calculator = {
   name: 'Kalkulator KPR',
@@ -13,8 +13,8 @@ export const calculator90: Calculator = {
     const { wrapper: tWrap, input: tInput } = createInput('Jangka Waktu (Tahun)', 'term', 'number', '30');
     
     const calcBtn = createButton('Hitung');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(pWrap);
     container.appendChild(dWrap);
@@ -33,8 +33,9 @@ export const calculator90: Calculator = {
       
       if (p > 0 && r > 0 && n > 0) {
         const monthly = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-        resDisplay.textContent = `Cicilan Bulanan: ${formatCurrency(monthly)}`;
-        resWrap.classList.remove('hidden');
+        showResult(formatCurrency(monthly));
+      } else {
+        showError('Harap masukkan data yang valid.');
       }
     };
 
@@ -42,5 +43,7 @@ export const calculator90: Calculator = {
       pInput.value = ''; dInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

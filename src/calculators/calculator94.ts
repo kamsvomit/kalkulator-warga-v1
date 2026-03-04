@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, setupEnterKeyNavigation } from '../utils';
 
 export const calculator94: Calculator = {
   name: 'Kalkulator Inflasi',
@@ -12,8 +12,8 @@ export const calculator94: Calculator = {
     const { wrapper: yWrap, input: yInput } = createInput('Tahun', 'years', 'number');
     
     const calcBtn = createButton('Hitung Nilai Masa Depan');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(aWrap);
     container.appendChild(rWrap);
@@ -29,8 +29,9 @@ export const calculator94: Calculator = {
       
       if (amount > 0 && years > 0) {
         const future = amount * Math.pow(1 + rate, years);
-        resDisplay.textContent = `Nilai Masa Depan: ${formatCurrency(future)}`;
-        resWrap.classList.remove('hidden');
+        showResult(formatCurrency(future));
+      } else {
+        showError('Harap masukkan jumlah dan tahun yang valid.');
       }
     };
 
@@ -38,5 +39,7 @@ export const calculator94: Calculator = {
       aInput.value = ''; yInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

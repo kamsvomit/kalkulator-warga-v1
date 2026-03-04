@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay, formatCurrency } from '../utils';
+import { createInput, createButton, createResultDisplay, formatCurrency, setupEnterKeyNavigation } from '../utils';
 
 export const calculator93: Calculator = {
   name: 'Kalkulator Kekayaan Bersih',
@@ -11,8 +11,8 @@ export const calculator93: Calculator = {
     const { wrapper: lWrap, input: lInput } = createInput('Total Liabilitas/Hutang (Rp)', 'liab', 'number');
     
     const calcBtn = createButton('Hitung');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(aWrap);
     container.appendChild(lWrap);
@@ -24,13 +24,14 @@ export const calculator93: Calculator = {
       const assets = parseFloat(aInput.value) || 0;
       const liab = parseFloat(lInput.value) || 0;
       const net = assets - liab;
-      resDisplay.textContent = `Kekayaan Bersih: ${formatCurrency(net)}`;
-      resWrap.classList.remove('hidden');
+      showResult(formatCurrency(net));
     };
 
     resetBtn.onclick = () => {
       aInput.value = ''; lInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

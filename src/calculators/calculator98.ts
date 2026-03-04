@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay } from '../utils';
+import { createInput, createButton, createResultDisplay, setupEnterKeyNavigation } from '../utils';
 
 export const calculator98: Calculator = {
   name: 'Kalkulator Nilai Akhir',
@@ -11,8 +11,8 @@ export const calculator98: Calculator = {
     const { wrapper: wWrap, input: wInput } = createInput('Bobot (%) (pisahkan dengan koma)', 'weights', 'text', '30, 40, 30');
     
     const calcBtn = createButton('Hitung Nilai');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(gWrap);
     container.appendChild(wWrap);
@@ -28,11 +28,12 @@ export const calculator98: Calculator = {
         let total = 0;
         let totalWeight = 0;
         for (let i = 0; i < grades.length; i++) {
-          total += (grades[i] * weights[i]) / 100;
+          total += (grades[i] * (weights[i] / 100));
           totalWeight += weights[i];
         }
-        resDisplay.textContent = `Nilai Akhir: ${total.toFixed(2)}%`;
-        resWrap.classList.remove('hidden');
+        showResult(`${total.toFixed(2)}%`);
+      } else {
+        showError('Harap masukkan jumlah nilai dan bobot yang sama.');
       }
     };
 
@@ -40,5 +41,7 @@ export const calculator98: Calculator = {
       gInput.value = ''; wInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };

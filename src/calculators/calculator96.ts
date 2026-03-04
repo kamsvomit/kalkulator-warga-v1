@@ -1,5 +1,5 @@
 import { Calculator } from '../types';
-import { createInput, createButton, createResultDisplay } from '../utils';
+import { createInput, createButton, createResultDisplay, setupEnterKeyNavigation } from '../utils';
 
 export const calculator96: Calculator = {
   name: 'Konversi Satuan Masak',
@@ -25,8 +25,8 @@ export const calculator96: Calculator = {
     });
 
     const calcBtn = createButton('Konversi');
-    const resetBtn = createButton('Reset', 'bg-gray-200 text-gray-700 hover:bg-gray-300 ml-2');
-    const { wrapper: resWrap, display: resDisplay } = createResultDisplay();
+    const resetBtn = createButton('Reset', 'btn-macos-secondary ml-2');
+    const { wrapper: resWrap, showError, showResult } = createResultDisplay();
 
     container.appendChild(vWrap);
     container.appendChild(fromSelect);
@@ -44,8 +44,9 @@ export const calculator96: Calculator = {
       if (!isNaN(val)) {
         const res = (val * factors[from]) / factors[to];
         const unitName = to === 'Tsp' ? 'Sdt' : (to === 'Tbsp' ? 'Sdm' : 'Cup');
-        resDisplay.textContent = `${res.toFixed(2)} ${unitName}`;
-        resWrap.classList.remove('hidden');
+        showResult(`${res.toFixed(2)} ${unitName}`);
+      } else {
+        showError('Harap masukkan angka yang valid.');
       }
     };
 
@@ -53,5 +54,7 @@ export const calculator96: Calculator = {
       vInput.value = '';
       resWrap.classList.add('hidden');
     };
+
+    setupEnterKeyNavigation(container, () => calcBtn.click());
   }
 };
