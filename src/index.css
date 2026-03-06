@@ -91,15 +91,17 @@ body {
   height: 100%;
 }
 
-/* ===== GLOBAL ACCENT GRADIENT (static, safe elements only) ===== */
-/* NOTE: Do NOT apply background-clip:text globally — breaks backdrop-filter */
+/* ===== GLOBAL ACCENT GRADIENT ===== */
+.text-red-600,
+.text-red-500 {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .btn-3d {
   background: linear-gradient(135deg, #ef4444, #f97316) !important;
-}
-
-.tool-icon-wrapper {
-  background: linear-gradient(135deg, #ef4444, #f97316);
 }
 
 /* ===== HERO ENHANCEMENTS ===== */

@@ -287,7 +287,7 @@ function renderHome() {
                   <span id="hero-typewriter" class="hero-gradient-text"></span><span class="hero-cursor">|</span>
                 </h2>
                 <p class="text-base text-arsenic/70 font-medium leading-relaxed">
-                  Finansial, kesehatan, hingga tradisi, semua dalam satu genggaman.
+                  Finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
                 </p>
               </div>
             </div>
