@@ -50,11 +50,11 @@ html {
   --input-bg: rgba(93, 94, 95, 0.04);
 
   /* Glass variables - light mode */
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.85);
-  --glass-border-bottom: rgba(93, 94, 95, 0.08);
-  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 32px rgba(93, 94, 95, 0.08);
-  --glass-blur: blur(32px) saturate(200%) brightness(1.04);
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-border-bottom: rgba(93, 94, 95, 0.1);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.95), 0 4px 24px rgba(93, 94, 95, 0.1);
+  --glass-blur: blur(28px) saturate(180%) brightness(1.05);
 }
 
 .dark {
@@ -69,11 +69,11 @@ html {
   --input-bg: rgba(255, 255, 255, 0.06);
 
   /* Glass variables - dark mode */
-  --glass-bg: rgba(17, 18, 19, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-bg: rgba(20, 21, 22, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.07);
   --glass-border-bottom: rgba(255, 255, 255, 0.05);
-  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 40px rgba(0, 0, 0, 0.55);
-  --glass-blur: blur(32px) saturate(180%) brightness(0.92);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 32px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(28px) saturate(160%) brightness(0.95);
 }
 
 body {
@@ -139,23 +139,13 @@ body {
   50% { opacity: 0; }
 }
 
-/* ===== HEADER GLASS ===== */
+/* ===== HEADER SOLID ===== */
 .header-apple {
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--card-bg);
   color: var(--text-main);
-  border-bottom: 1px solid rgba(93, 94, 95, 0.08);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 16px rgba(93, 94, 95, 0.06);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border-bottom);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
   transition: background 0.3s ease;
-}
-
-.dark .header-apple {
-  background: rgba(20, 21, 22, 0.45);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 20px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
 }
 
 /* ===== HERO CARD GLASS (saat tool active) ===== */
@@ -174,44 +164,15 @@ body {
 #main-container.tool-active .hero-card {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
-  transition: background 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.4s ease, backdrop-filter 0.4s ease !important;
-  background: rgba(255, 255, 255, 0.55) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  transition: none !important;
+  background: var(--card-bg) !important;
   border-radius: 1.5rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.7) !important;
-  box-shadow: 0 2px 24px rgba(93, 94, 95, 0.12), 0 1px 0 rgba(255,255,255,0.9) inset !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--card-shadow) !important;
   margin: 0 0.5rem;
 }
 
-.dark #main-container.tool-active .hero-card {
-  background: rgba(30, 31, 32, 0.45) !important;
-  backdrop-filter: blur(24px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 2px 32px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255,255,255,0.04) inset !important;
-}
-
-/* ===== GLASS INNER HIGHLIGHT ===== */
-#main-container.tool-active .hero-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 1.5rem;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.05) 60%, transparent 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.dark #main-container.tool-active .hero-card::before {
-  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);
-}
-
-
+/* ===== BASE HERO CARD ===== */
 .hero-card {
   padding: 2.5rem 1.5rem;
   transition: background-color 0.3s ease, border-color 0.3s ease;
