@@ -233,7 +233,7 @@ function renderHome() {
             </button>
             <div id="header-search-container" class="relative flex items-center">
               <input type="text" id="header-search-input" placeholder="Cari alat..." 
-                     class="w-0 opacity-0 h-7 bg-arsenic/5 border border-arsenic/10 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
+                     class="w-0 opacity-0 h-7 bg-transparent border border-arsenic/15 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
               <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
                 <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -266,32 +266,30 @@ function renderHome() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Active Tool Section -->
-        <div id="active-tool-view" class="hidden px-4 animate-fade-in">
-          <div class="active-card">
-            <div class="flex items-center justify-between mb-4">
-              <button id="close-tool" class="flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 rounded-lg text-red-600 transition-all text-[11px] font-black uppercase tracking-widest border border-red-100/50">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-                Tutup
-              </button>
-              <span id="active-tool-cat" class="text-[8px] font-black text-arsenic px-2 py-1 rounded-md uppercase tracking-widest border border-arsenic/10 bg-arsenic/5"></span>
-            </div>
-            <h2 id="active-tool-name" class="text-xl font-black text-arsenic mb-1"></h2>
-            <p id="active-tool-desc" class="text-xs text-arsenic mb-6 font-medium leading-relaxed"></p>
-            <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-arsenic/10"></div>
             
-            <!-- Last Tool Info -->
-            <div id="last-tool-info" class="mt-8 pt-6 border-t border-arsenic/10 hidden">
-              <p class="text-[10px] font-black text-arsenic uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
-              <button id="last-tool-link" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors flex items-center gap-2 group">
-                <span class="group-hover:-translate-x-1 transition-transform">←</span>
-                <span id="last-tool-link-text"></span>
-              </button>
+            <!-- Active Tool Section -->
+            <div id="active-tool-view" class="hidden active-card animate-fade-in">
+              <div class="flex items-center justify-between mb-4">
+                <button id="close-tool" class="flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 rounded-lg text-red-600 transition-all text-[11px] font-black uppercase tracking-widest border border-red-100/50">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  Tutup
+                </button>
+                <span id="active-tool-cat" class="text-[8px] font-black text-arsenic px-2 py-1 rounded-md uppercase tracking-widest border border-arsenic/10 bg-arsenic/5"></span>
+              </div>
+              <h2 id="active-tool-name" class="text-xl font-black text-arsenic mb-1"></h2>
+              <p id="active-tool-desc" class="text-xs text-arsenic mb-6 font-medium leading-relaxed"></p>
+              <div id="active-tool-content" class="max-h-[60vh] overflow-y-auto no-scrollbar pt-6 border-t border-arsenic/10"></div>
+              
+              <!-- Last Tool Info (Moved here) -->
+              <div id="last-tool-info" class="mt-8 pt-6 border-t border-arsenic/10 hidden">
+                <p class="text-[10px] font-black text-arsenic uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
+                <button id="last-tool-link" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors flex items-center gap-2 group">
+                  <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                  <span id="last-tool-link-text"></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -46,8 +46,8 @@ html {
   --header-bg: #ffffff;
   --card-bg: #ffffff;
   --body-bg: rgba(93, 94, 95, 0.02);
-  --border-color: rgba(93, 94, 95, 0.08);
-  --input-bg: #ffffff;
+  --border-color: rgba(93, 94, 95, 0.25);
+  --input-bg: rgba(93, 94, 95, 0.04);
 }
 
 .dark {
@@ -59,7 +59,7 @@ html {
   --body-bg: #111213;
   --border-color: rgba(255, 255, 255, 0.1);
   --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-  --input-bg: #2d2e2f;
+  --input-bg: rgba(255, 255, 255, 0.06);
 }
 
 body {
@@ -186,15 +186,16 @@ body {
 }
 
 .input-3d {
-  background: var(--input-bg);
+  background: var(--input-bg) !important;
   border: 1px solid var(--border-color);
   color: var(--text-main);
   transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
 }
 
 .input-3d:focus {
   border-color: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 /* Custom scrollbar - Hidden but scrollable */
