@@ -328,7 +328,7 @@ function renderHome() {
 
               <!-- Description -->
               <p class="hero-desc text-sm text-arsenic/65 font-medium leading-relaxed max-w-sm">
-                Koleksi alat hitung esensial untuk kebutuhan sehari-hari—dari finansial, kesehatan, hingga tradisi. Semua gratis, cepat, tanpa iklan.
+                Alat hitung untuk kebutuhan sehari-hari warga Indonesia. Finansial, kesehatan, belanja, tagihan rumah. Gratis, cepat, tanpa iklan.
               </p>
 
               <!-- Divider -->
