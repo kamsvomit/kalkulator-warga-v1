@@ -1,6 +1,5 @@
 import { Calculator } from './types';
 import { playSound } from './utils';
-import { generateHeroImage } from './services/imageService';
 import './index.css';
 // We will import all 100 calculators here. 
 // Since we are creating them dynamically, we'll use a registry.
@@ -42,13 +41,6 @@ async function init() {
   });
 
   renderHome();
-  
-  // Load Hero Image
-  generateHeroImage().then(imageUrl => {
-    if (imageUrl) {
-      document.documentElement.style.setProperty('--hero-url', `url(${imageUrl})`);
-    }
-  });
   
   // Clock Update
   setInterval(() => {
@@ -252,19 +244,19 @@ function renderHome() {
         </div>
       </header>
 
-      <main id="main-container" class="w-full pb-8 space-y-10">
+      <main id="main-container" class="max-w-2xl mx-auto w-full pb-8 space-y-10">
         <!-- Hero Section (Sticky when tool open) -->
-        <div id="hero-section" class="w-full">
+        <div id="hero-section">
           <div id="hero-content" class="hero-card animate-fade-in">
-            <div id="copywriting-view" class="max-w-2xl mx-auto w-full space-y-8 flex flex-col items-center">
-              <div class="pb-6">
-                <div class="flex flex-col items-center">
+            <div id="copywriting-view" class="space-y-8">
+              <div class="pb-6 border-b border-arsenic/5">
+                <div class="flex flex-col">
                   <span id="header-time" class="text-6xl font-black tracking-tighter text-arsenic leading-none">00:00</span>
                   <span class="text-xs font-black text-red-600 uppercase tracking-[0.2em] mt-3">${dateStr}</span>
                 </div>
               </div>
               
-              <div class="max-w-xl text-center">
+              <div class="max-w-xl">
                 <h2 class="text-3xl font-black text-arsenic mb-3 leading-tight tracking-tight">
                   Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span>
                 </h2>
@@ -276,7 +268,7 @@ function renderHome() {
             </div>
             
             <!-- Active Tool Section -->
-            <div id="active-tool-view" class="hidden active-card animate-fade-in max-w-2xl mx-auto w-full">
+            <div id="active-tool-view" class="hidden active-card animate-fade-in">
               <div class="flex items-center justify-between mb-4">
                 <button id="close-tool" class="flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 rounded-lg text-red-600 transition-all text-[11px] font-black uppercase tracking-widest border border-red-100/50">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -303,7 +295,7 @@ function renderHome() {
         </div>
 
         <!-- Popular Tools Section (Carousel) -->
-        <div class="section-container animate-fade-in overflow-hidden px-4 max-w-2xl mx-auto w-full">
+        <div class="section-container animate-fade-in overflow-hidden px-4">
           <div class="flex items-center justify-between mb-5 px-2">
             <h3 class="text-[10px] font-black text-arsenic uppercase tracking-widest flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
@@ -339,7 +331,7 @@ function renderHome() {
         </div>
 
         <!-- Grouped List Section -->
-        <div id="tools-list-container" class="space-y-6 px-4 max-w-2xl mx-auto w-full">
+        <div id="tools-list-container" class="space-y-6 px-4">
           ${groupedCalculators.map((group, gIdx) => `
             <div class="rounded-3xl p-5 sm:p-6 shadow-sm space-y-6 category-section" data-category="${group.name.toLowerCase()}">
               <div class="flex items-center justify-between">
@@ -371,7 +363,7 @@ function renderHome() {
           `).join('')}
         </div>
 
-        <footer class="py-12 text-center border-t border-arsenic/10 max-w-2xl mx-auto w-full">
+        <footer class="py-12 text-center border-t border-arsenic/10">
           <p class="text-[10px] text-arsenic font-black uppercase tracking-[0.3em]">
             Digital Assistant v2.1 • 2026
           </p>

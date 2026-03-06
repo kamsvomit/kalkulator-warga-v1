@@ -109,48 +109,25 @@ body {
   transition: none !important;
   box-shadow: none !important;
   backdrop-filter: blur(16px);
-  background-image: none !important;
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border-radius: 0 !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-  margin: 0;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 1.5rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  margin: 0 0.5rem;
 }
 
 .dark #main-container.tool-active .hero-card {
-  background-image: none !important;
-  background-color: rgba(17, 18, 19, 0.8) !important;
+  background: rgba(17, 18, 19, 0.8) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   box-shadow: none !important;
 }
 
 .hero-card {
-  padding: 5rem 2rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease, background-image 0.3s ease;
+  padding: 2.5rem 1.5rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   position: relative;
   z-index: 10;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9)), var(--hero-url);
-  background-size: cover;
-  background-position: center;
+  background: transparent;
   border-bottom: none;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-  min-height: 450px;
-  width: 100%;
-}
-
-.dark .hero-card {
-  background-image: linear-gradient(to bottom, rgba(17, 18, 19, 0.2), rgba(17, 18, 19, 0.9)), var(--hero-url);
-}
-
-.hero-card > * {
-  position: relative;
-  z-index: 2;
 }
 
 .dark .hero-card {
