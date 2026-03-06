@@ -214,7 +214,13 @@ function renderHome() {
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" fill="url(#iconGrad)" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ef4444"/>
+                  <stop offset="100%" stop-color="#f97316"/>
+                </linearGradient>
+              </defs>
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
             <h1 class="text-sm font-bold tracking-tight text-red-600">Kalkulator Warga</h1>
@@ -224,10 +230,22 @@ function renderHome() {
         <div class="flex items-center gap-6">
           <div class="flex items-center gap-2">
             <button id="theme-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors" title="Ganti Tema">
-              <svg id="sun-icon" class="w-4 h-4 text-red-600 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="url(#sunGrad)" viewBox="0 0 24 24">
+                <defs>
+                  <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ef4444"/>
+                    <stop offset="100%" stop-color="#f97316"/>
+                  </linearGradient>
+                </defs>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path>
               </svg>
-              <svg id="moon-icon" class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="url(#moonGrad)" viewBox="0 0 24 24">
+                <defs>
+                  <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ef4444"/>
+                    <stop offset="100%" stop-color="#f97316"/>
+                  </linearGradient>
+                </defs>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
@@ -235,7 +253,13 @@ function renderHome() {
               <input type="text" id="header-search-input" placeholder="Cari alat..." 
                      class="w-0 opacity-0 h-7 bg-transparent border border-arsenic/15 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
               <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
-                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="url(#searchGrad)" viewBox="0 0 24 24">
+                  <defs>
+                    <linearGradient id="searchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ef4444"/>
+                      <stop offset="100%" stop-color="#f97316"/>
+                    </linearGradient>
+                  </defs>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
               </button>
@@ -249,13 +273,6 @@ function renderHome() {
         <div id="hero-section">
           <div id="hero-content" class="hero-card animate-fade-in">
             <div id="copywriting-view" class="space-y-8">
-              <div class="pb-6 border-b border-arsenic/5">
-                <div class="flex flex-col">
-                  <span id="header-time" class="text-6xl font-black tracking-tighter text-arsenic leading-none">00:00</span>
-                  <span class="text-xs font-black text-red-600 uppercase tracking-[0.2em] mt-3">${dateStr}</span>
-                </div>
-              </div>
-              
               <div class="max-w-xl">
                 <!-- Live badge -->
                 <div class="hero-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-3">
@@ -270,8 +287,7 @@ function renderHome() {
                   <span id="hero-typewriter" class="hero-gradient-text"></span><span class="hero-cursor">|</span>
                 </h2>
                 <p class="text-base text-arsenic/70 font-medium leading-relaxed">
-                  Koleksi alat hitung esensial untuk kebutuhan sehari-hari warga Indonesia. 
-                  Mulai dari finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
+                  Finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
                 </p>
               </div>
             </div>
