@@ -31,7 +31,9 @@
   --color-black: #1a1b1c;
 }
 
+/* Critical: prevent any overflow:hidden on root that kills backdrop-filter */
 html {
+  overflow: visible !important;
   transition: background-color 0.3s ease;
 }
 
@@ -199,6 +201,8 @@ body {
 .hero-card {
   padding: 2.5rem 1.5rem;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  z-index: 10;
   background: transparent;
   border-bottom: none;
 }
