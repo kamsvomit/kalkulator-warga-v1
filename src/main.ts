@@ -193,22 +193,30 @@ function renderHome() {
     <div class="min-h-screen flex flex-col bg-arsenic/[0.02] selection:bg-red-500/30">
       <!-- Apple Style Sticky Header -->
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#dc2626"/>
+              <stop offset="100%" stop-color="#f97316"/>
+            </linearGradient>
+          </defs>
+        </svg>
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" fill="url(#brand-grad)" viewBox="0 0 24 24">
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
-            <h1 class="text-sm font-bold tracking-tight text-red-600">Kalkulator Warga</h1>
+            <h1 class="text-sm font-bold tracking-tight" style="background:linear-gradient(90deg,#dc2626,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Kalkulator Warga</h1>
           </div>
         </div>
         
         <div class="flex items-center gap-6">
           <div class="flex items-center gap-2">
             <button id="theme-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors" title="Ganti Tema">
-              <svg id="sun-icon" class="w-4 h-4 text-red-600 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="url(#brand-grad)" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path>
               </svg>
-              <svg id="moon-icon" class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="url(#brand-grad)" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
@@ -216,7 +224,7 @@ function renderHome() {
               <input type="text" id="header-search-input" placeholder="Cari alat..." 
                      class="w-0 opacity-0 h-7 bg-transparent border border-arsenic/15 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
               <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
-                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="url(#brand-grad)" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
               </button>
@@ -371,7 +379,7 @@ function renderHome() {
               <!-- Last Tool Info (Moved here) -->
               <div id="last-tool-info" class="mt-8 pt-6 border-t border-arsenic/10 hidden">
                 <p class="text-[10px] font-black text-arsenic uppercase tracking-[0.2em] mb-3">Terakhir Digunakan</p>
-                <button id="last-tool-link" class="text-[11px] font-bold text-red-500 hover:text-red-600 transition-colors flex items-center gap-2 group">
+                <button id="last-tool-link" class="text-[11px] font-bold transition-colors flex items-center gap-2 group" style="background:linear-gradient(90deg,#dc2626,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                   <span class="group-hover:-translate-x-1 transition-transform">←</span>
                   <span id="last-tool-link-text"></span>
                 </button>
