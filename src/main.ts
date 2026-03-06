@@ -214,17 +214,7 @@ function renderHome() {
       <header class="sticky top-0 z-[100] h-12 header-apple flex items-center justify-between px-6">
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <svg class="w-5 h-5" fill="url(#iconGrad)" viewBox="0 0 24 24">
-              <defs>
-                <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ef4444">
-                    <animate attributeName="stop-color" values="#ef4444;#f97316;#ef4444" dur="4s" repeatCount="indefinite"/>
-                  </stop>
-                  <stop offset="100%" stop-color="#f97316">
-                    <animate attributeName="stop-color" values="#f97316;#dc2626;#f97316" dur="4s" repeatCount="indefinite"/>
-                  </stop>
-                </linearGradient>
-              </defs>
+            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.7,19L13.6,9.9c0.6-1.3,0.4-2.8-0.5-3.7c-1.1-1.1-2.9-1.1-4,0L11,8l-3,3l-1.8-1.8c-1.1,1.1-1.1,2.9,0,4 c0.9,0.9,2.4,1.1,3.7,0.5L19,22.7c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.4,22.7,19z"/>
             </svg>
             <h1 class="text-sm font-bold tracking-tight text-red-600">Kalkulator Warga</h1>
@@ -273,7 +263,7 @@ function renderHome() {
                   <span id="hero-typewriter" class="hero-gradient-text"></span><span class="hero-cursor">|</span>
                 </h2>
                 <p class="text-base text-arsenic/70 font-medium leading-relaxed">
-                  Finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
+                  Finansial, kesehatan, hingga tradisi — semua dalam satu genggaman.
                 </p>
               </div>
             </div>

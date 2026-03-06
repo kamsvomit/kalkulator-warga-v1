@@ -42,8 +42,6 @@ html {
   --text-main: #5D5E5F;
   --text-muted: #5D5E5F;
   --accent: #ef4444;
-  --accent-gradient: linear-gradient(135deg, #ef4444, #f97316, #ef4444);
-  --accent-gradient-static: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
   --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
   --header-bg: #ffffff;
   --card-bg: #ffffff;
@@ -93,46 +91,6 @@ body {
   height: 100%;
 }
 
-
-/* ===== GLOBAL ACCENT GRADIENT ===== */
-
-/* Animated gradient keyframe */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Any element using text-red-600 or text-red-500 gets gradient */
-.text-red-600,
-.text-red-500 {
-  background: linear-gradient(135deg, #ef4444, #f97316, #dc2626);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-shift 4s ease infinite;
-}
-
-/* Buttons and solid backgrounds keep gradient too */
-.bg-red-500,
-.bg-red-600,
-.btn-3d {
-  background: linear-gradient(135deg, #ef4444, #f97316) !important;
-  background-size: 200% 200% !important;
-  animation: gradient-shift 4s ease infinite !important;
-}
-
-/* Borders with red */
-.border-red-500,
-.border-red-600 {
-  border-image: linear-gradient(135deg, #ef4444, #f97316) 1;
-}
-
-/* Focus ring */
-.input-3d:focus {
-  border-color: #f97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
-}
 
 /* ===== HERO ENHANCEMENTS ===== */
 .hero-badge {
