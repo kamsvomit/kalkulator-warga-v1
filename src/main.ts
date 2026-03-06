@@ -249,6 +249,13 @@ function renderHome() {
         <div id="hero-section">
           <div id="hero-content" class="hero-card animate-fade-in">
             <div id="copywriting-view" class="space-y-8">
+              <div class="pb-6 border-b border-arsenic/5">
+                <div class="flex flex-col">
+                  <span id="header-time" class="text-6xl font-black tracking-tighter text-arsenic leading-none">00:00</span>
+                  <span class="text-xs font-black text-red-600 uppercase tracking-[0.2em] mt-3">${dateStr}</span>
+                </div>
+              </div>
+              
               <div class="max-w-xl">
                 <!-- Live badge -->
                 <div class="hero-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-3">
@@ -263,7 +270,8 @@ function renderHome() {
                   <span id="hero-typewriter" class="hero-gradient-text"></span><span class="hero-cursor">|</span>
                 </h2>
                 <p class="text-base text-arsenic/70 font-medium leading-relaxed">
-                  Finansial, kesehatan, hingga tradisi — semua dalam satu genggaman.
+                  Koleksi alat hitung esensial untuk kebutuhan sehari-hari warga Indonesia. 
+                  Mulai dari finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
                 </p>
               </div>
             </div>
