@@ -82,26 +82,36 @@ body {
   color: var(--text-main);
   border-bottom: 1px solid var(--border-color);
   transition: background-color 0.3s ease;
+  will-change: transform;
 }
 
 #main-container.tool-active {
-  padding-top: 0.5rem !important;
-  transition: none !important;
+  padding-top: 0 !important;
 }
 
 #hero-section.sticky {
-  top: 3rem !important;
-  transition: none !important;
+  position: sticky !important;
+  top: 3.5rem !important;
+  z-index: 90;
+  margin: 0.5rem 0 !important;
+  will-change: transform;
 }
 
 #main-container.tool-active .hero-card {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  transition: none !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  backdrop-filter: blur(16px);
+  background: var(--header-bg);
+  border-radius: 1.5rem !important;
+  border: 1px solid var(--border-color) !important;
+  margin: 0 0.5rem;
 }
 
 .hero-card {
   padding: 2.5rem 1.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   position: relative;
   z-index: 10;
   background: var(--card-bg);
@@ -120,6 +130,13 @@ body {
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-container.tool-active .active-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 .carousel-dot {
