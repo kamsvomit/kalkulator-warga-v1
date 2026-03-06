@@ -91,54 +91,6 @@ body {
   height: 100%;
 }
 
-/* ===== GRADIENT TEKS MERAH ===== */
-.text-red-600,
-.text-red-500 {
-  background: linear-gradient(135deg, #ef4444, #f97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.btn-3d {
-  background: linear-gradient(135deg, #ef4444, #f97316) !important;
-}
-
-/* ===== HERO ENHANCEMENTS ===== */
-.hero-badge {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #ef4444;
-}
-.dark .hero-badge {
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.3);
-}
-
-.hero-pulse-dot {
-  animation: hero-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-@keyframes hero-pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
-  50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(239,68,68,0); }
-}
-
-.hero-gradient-text {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-cursor {
-  color: #ef4444;
-  animation: hero-blink 1s step-end infinite;
-}
-@keyframes hero-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 /* ===== HEADER GLASS ===== */
 .header-apple {
   background: var(--glass-bg);
