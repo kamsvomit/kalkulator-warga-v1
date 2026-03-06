@@ -94,41 +94,22 @@ body {
 }
 
 
-/* ===== GLOBAL ACCENT GRADIENT ===== */
+/* ===== GLOBAL ACCENT GRADIENT (static) ===== */
 
-/* Animated gradient keyframe */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Any element using text-red-600 or text-red-500 gets gradient */
 .text-red-600,
 .text-red-500 {
-  background: linear-gradient(135deg, #ef4444, #f97316, #dc2626);
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, #ef4444, #f97316);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-shift 4s ease infinite;
 }
 
-/* Buttons and solid backgrounds keep gradient too */
 .bg-red-500,
 .bg-red-600,
 .btn-3d {
   background: linear-gradient(135deg, #ef4444, #f97316) !important;
-  background-size: 200% 200% !important;
-  animation: gradient-shift 4s ease infinite !important;
 }
 
-/* Borders with red */
-.border-red-500,
-.border-red-600 {
-  border-image: linear-gradient(135deg, #ef4444, #f97316) 1;
-}
-
-/* Focus ring */
 .input-3d:focus {
   border-color: #f97316;
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
