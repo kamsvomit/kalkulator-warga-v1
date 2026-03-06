@@ -154,13 +154,18 @@ body {
 
 .header-apple {
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
   color: var(--text-main);
   border-bottom: 1px solid var(--glass-border-bottom);
   box-shadow: var(--glass-shadow);
   transition: background 0.3s ease, box-shadow 0.3s ease;
   isolation: isolate;
+}
+
+.dark .header-apple {
+  backdrop-filter: blur(28px) saturate(160%) brightness(0.95);
+  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(0.95);
 }
 
 /* ===== HERO CARD GLASS (saat tool active) ===== */
@@ -180,15 +185,20 @@ body {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
   transition: none !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.05) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.05) !important;
   background: var(--glass-bg) !important;
   border-radius: 1.5rem !important;
   border: 1px solid var(--glass-border) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),   /* light mode: inner top highlight */
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
     var(--glass-shadow) !important;
   margin: 0 0.5rem;
+}
+
+.dark #main-container.tool-active .hero-card {
+  backdrop-filter: blur(28px) saturate(160%) brightness(0.95) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(0.95) !important;
 }
 
 .dark #main-container.tool-active .hero-card {
