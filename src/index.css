@@ -31,9 +31,7 @@
   --color-black: #1a1b1c;
 }
 
-/* Critical: prevent any overflow:hidden on root that kills backdrop-filter */
 html {
-  overflow: visible !important;
   transition: background-color 0.3s ease;
 }
 
@@ -44,8 +42,6 @@ html {
   --text-main: #5D5E5F;
   --text-muted: #5D5E5F;
   --accent: #ef4444;
-  --accent-gradient: linear-gradient(135deg, #ef4444, #f97316, #ef4444);
-  --accent-gradient-static: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
   --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
   --header-bg: #ffffff;
   --card-bg: #ffffff;
@@ -95,26 +91,15 @@ body {
   height: 100%;
 }
 
+/* ===== GLOBAL ACCENT GRADIENT (static, safe elements only) ===== */
+/* NOTE: Do NOT apply background-clip:text globally — breaks backdrop-filter */
 
-/* ===== GLOBAL ACCENT GRADIENT (static) ===== */
-
-.text-red-600,
-.text-red-500 {
-  background: linear-gradient(135deg, #ef4444, #f97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.bg-red-500,
-.bg-red-600,
 .btn-3d {
   background: linear-gradient(135deg, #ef4444, #f97316) !important;
 }
 
-.input-3d:focus {
-  border-color: #f97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+.tool-icon-wrapper {
+  background: linear-gradient(135deg, #ef4444, #f97316);
 }
 
 /* ===== HERO ENHANCEMENTS ===== */
@@ -152,20 +137,16 @@ body {
   50% { opacity: 0; }
 }
 
+/* ===== HEADER GLASS ===== */
 .header-apple {
   background: var(--glass-bg);
-  backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
-  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   color: var(--text-main);
   border-bottom: 1px solid var(--glass-border-bottom);
   box-shadow: var(--glass-shadow);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  isolation: isolate;
-}
-
-.dark .header-apple {
-  backdrop-filter: blur(28px) saturate(160%) brightness(0.95);
-  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(0.95);
+  will-change: transform;
 }
 
 /* ===== HERO CARD GLASS (saat tool active) ===== */
@@ -178,27 +159,22 @@ body {
   top: 3.5rem !important;
   z-index: 90;
   margin: 0.5rem 0 !important;
-  /* will-change: transform removed — breaks backdrop-filter on children */
+  will-change: transform;
 }
 
 #main-container.tool-active .hero-card {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
   transition: none !important;
-  backdrop-filter: blur(28px) saturate(180%) brightness(1.05) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.05) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
   background: var(--glass-bg) !important;
   border-radius: 1.5rem !important;
   border: 1px solid var(--glass-border) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),   /* light mode: inner top highlight */
     var(--glass-shadow) !important;
   margin: 0 0.5rem;
-}
-
-.dark #main-container.tool-active .hero-card {
-  backdrop-filter: blur(28px) saturate(160%) brightness(0.95) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(0.95) !important;
 }
 
 .dark #main-container.tool-active .hero-card {
@@ -320,7 +296,6 @@ body {
 html, body {
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden; /* x only, NOT overflow:hidden — that kills backdrop-filter */
 }
 
 @keyframes fade-in {
