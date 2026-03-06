@@ -65,15 +65,7 @@ async function init() {
     });
   }
   
-  // Hide splash screen after 1 second
-  setTimeout(() => {
-    const splash = document.getElementById('splash-screen');
-    if (splash) {
-      splash.classList.add('opacity-0');
-      splash.style.pointerEvents = 'none';
-      setTimeout(() => splash.remove(), 400);
-    }
-  }, 1000);
+
 }
 
 function getToolIcon(toolId: string, category: string): { svg: string, color: string } {
