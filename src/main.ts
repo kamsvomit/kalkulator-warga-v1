@@ -46,7 +46,8 @@ async function init() {
   setInterval(() => {
     const headerTime = document.getElementById('header-time');
     if (headerTime) {
-      headerTime.textContent = new Date().toLocaleTimeString('id-ID', { hour12: false });
+      const now = new Date();
+      headerTime.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
     }
   }, 1000);
   
@@ -205,7 +206,7 @@ function renderHome() {
   }));
 
   const now = new Date();
-  const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' });
+  const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   app.innerHTML = `
     <div class="min-h-screen flex flex-col bg-arsenic/[0.02] selection:bg-red-500/30">
@@ -221,34 +222,48 @@ function renderHome() {
         </div>
         
         <div class="flex items-center gap-6">
-          <div class="hidden sm:flex items-center gap-4 border-r border-arsenic/10 pr-6">
-            <span id="header-time" class="text-[11px] font-medium tracking-widest text-red-600">00:00:00</span>
-            <span class="text-[10px] font-medium text-red-600/60 tracking-tight uppercase">${dateStr}</span>
-          </div>
-          <div id="header-search-container" class="relative flex items-center">
-            <input type="text" id="header-search-input" placeholder="Cari alat..." 
-                   class="w-0 opacity-0 h-7 bg-arsenic/5 border border-arsenic/10 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
-            <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <div class="flex items-center gap-2">
+            <button id="theme-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors" title="Ganti Tema">
+              <svg id="sun-icon" class="w-4 h-4 text-red-600 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path>
+              </svg>
+              <svg id="moon-icon" class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
+            <div id="header-search-container" class="relative flex items-center">
+              <input type="text" id="header-search-input" placeholder="Cari alat..." 
+                     class="w-0 opacity-0 h-7 bg-arsenic/5 border border-arsenic/10 rounded-md px-0 text-[11px] font-medium text-arsenic placeholder:text-arsenic focus:outline-none transition-all duration-300">
+              <button id="header-search-toggle" class="p-1.5 hover:bg-arsenic/5 rounded-md transition-colors">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <main id="main-container" class="max-w-2xl mx-auto w-full px-4 pt-4 pb-8 space-y-10 transition-all duration-300">
+      <main id="main-container" class="max-w-2xl mx-auto w-full pb-8 space-y-10 transition-all duration-300">
         <!-- Hero Section (Sticky when tool open) -->
         <div id="hero-section" class="transition-all duration-300">
           <div id="hero-content" class="hero-card animate-fade-in">
-            <div id="copywriting-view" class="flex items-center gap-6">
-              <div class="flex-1">
-                <h2 class="text-2xl font-black text-arsenic mb-2 leading-tight">Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span></h2>
-                <p class="text-sm text-arsenic font-medium leading-relaxed">Dari pajak hingga kesehatan, semua alat hitung yang Anda butuhkan ada di sini. Gratis & Akurat.</p>
+            <div id="copywriting-view" class="space-y-8">
+              <div class="pb-6 border-b border-arsenic/5">
+                <div class="flex flex-col">
+                  <span id="header-time" class="text-6xl font-black tracking-tighter text-arsenic leading-none">00:00</span>
+                  <span class="text-xs font-black text-red-600 uppercase tracking-[0.2em] mt-3">${dateStr}</span>
+                </div>
               </div>
-              <div class="hidden sm:block shrink-0">
-                <img src="https://ouch-cdn2.icons8.com/mS9W_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz_vU_Tz/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTYv/YjY1YjY1YjYtYjY1/Yy00YjY1LWJiNjUt/YjY1YjY1YjY1YjY1/LnN2Zw.png" 
-                     alt="Hero" class="w-24 h-24 object-contain opacity-80" referrerPolicy="no-referrer" loading="lazy">
+              
+              <div class="max-w-xl">
+                <h2 class="text-3xl font-black text-arsenic mb-3 leading-tight tracking-tight">
+                  Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span>
+                </h2>
+                <p class="text-base text-arsenic/70 font-medium leading-relaxed">
+                  Koleksi alat hitung esensial untuk kebutuhan sehari-hari warga Indonesia. 
+                  Mulai dari finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
+                </p>
               </div>
             </div>
             
@@ -280,7 +295,7 @@ function renderHome() {
         </div>
 
         <!-- Popular Tools Section (Carousel) -->
-        <div class="section-container animate-fade-in overflow-hidden">
+        <div class="section-container animate-fade-in overflow-hidden px-4">
           <div class="flex items-center justify-between mb-5 px-2">
             <h3 class="text-[10px] font-black text-arsenic uppercase tracking-widest flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
@@ -316,9 +331,9 @@ function renderHome() {
         </div>
 
         <!-- Grouped List Section -->
-        <div id="tools-list-container" class="space-y-6">
+        <div id="tools-list-container" class="space-y-6 px-4">
           ${groupedCalculators.map((group, gIdx) => `
-            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-arsenic/5 shadow-sm space-y-6 category-section" data-category="${group.name.toLowerCase()}">
+            <div class="rounded-3xl p-5 sm:p-6 shadow-sm space-y-6 category-section" data-category="${group.name.toLowerCase()}">
               <div class="flex items-center justify-between">
                 <h3 class="text-sm sm:text-base font-black text-arsenic">${group.name}</h3>
                 <button class="see-all-btn flex items-center gap-1 px-3 py-1.5 rounded-full border border-green-500/20 text-green-600 text-[10px] font-bold hover:bg-green-50 transition-colors"
@@ -377,6 +392,32 @@ function renderHome() {
   const headerSearchToggle = document.getElementById('header-search-toggle')!;
   const headerSearchInput = document.getElementById('header-search-input') as HTMLInputElement;
   const scrollTopBtn = document.getElementById('scroll-top')!;
+  const themeToggleBtn = document.getElementById('theme-toggle')!;
+  const sunIcon = document.getElementById('sun-icon')!;
+  const moonIcon = document.getElementById('moon-icon')!;
+
+  // Theme Logic
+  const applyTheme = (theme: string) => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+  };
+
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(currentTheme);
+
+  themeToggleBtn.onclick = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+  };
 
   const heroSection = document.getElementById('hero-section')!;
   const mainContainer = document.getElementById('main-container')!;

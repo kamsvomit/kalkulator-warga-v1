@@ -51,7 +51,7 @@ export function createButton(text: string, className: string = 'btn-3d'): HTMLBu
 
 export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElement, showError: (msg: string) => void, showResult: (val: string) => void } {
   const wrapper = document.createElement('div');
-  wrapper.className = 'mt-6 p-5 bg-red-50 border border-red-100 rounded-2xl hidden animate-fade-in relative group';
+  wrapper.className = 'mt-6 p-5 result-display hidden animate-fade-in relative group';
   
   const header = document.createElement('div');
   header.className = 'flex items-center justify-between mb-3';
@@ -101,18 +101,15 @@ export function createResultDisplay(): { wrapper: HTMLElement, display: HTMLElem
   
   const showError = (msg: string) => {
     wrapper.classList.remove('hidden');
-    wrapper.classList.add('bg-red-50', 'border-red-100');
     title.textContent = '⚠️ Error';
     title.classList.add('text-red-500');
     display.textContent = msg;
-    display.className = 'text-sm font-bold text-red-600';
+    display.className = 'text-sm font-bold text-red-600 dark:text-red-400';
     shareBtn.classList.add('hidden');
   };
 
   const showResult = (val: string) => {
     wrapper.classList.remove('hidden');
-    wrapper.classList.remove('bg-red-50', 'border-red-100');
-    wrapper.classList.add('bg-red-50', 'border-red-100');
     title.textContent = 'Hasil Perhitungan';
     title.classList.remove('text-red-500');
     title.classList.add('text-red-500');
