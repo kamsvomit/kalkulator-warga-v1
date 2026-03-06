@@ -42,6 +42,8 @@ html {
   --text-main: #5D5E5F;
   --text-muted: #5D5E5F;
   --accent: #ef4444;
+  --accent-gradient: linear-gradient(135deg, #ef4444, #f97316, #ef4444);
+  --accent-gradient-static: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
   --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
   --header-bg: #ffffff;
   --card-bg: #ffffff;
@@ -91,7 +93,82 @@ body {
   height: 100%;
 }
 
-/* ===== HEADER GLASS ===== */
+
+/* ===== GLOBAL ACCENT GRADIENT ===== */
+
+/* Animated gradient keyframe */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Any element using text-red-600 or text-red-500 gets gradient */
+.text-red-600,
+.text-red-500 {
+  background: linear-gradient(135deg, #ef4444, #f97316, #dc2626);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Buttons and solid backgrounds keep gradient too */
+.bg-red-500,
+.bg-red-600,
+.btn-3d {
+  background: linear-gradient(135deg, #ef4444, #f97316) !important;
+  background-size: 200% 200% !important;
+  animation: gradient-shift 4s ease infinite !important;
+}
+
+/* Borders with red */
+.border-red-500,
+.border-red-600 {
+  border-image: linear-gradient(135deg, #ef4444, #f97316) 1;
+}
+
+/* Focus ring */
+.input-3d:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+/* ===== HERO ENHANCEMENTS ===== */
+.hero-badge {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+.dark .hero-badge {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.hero-pulse-dot {
+  animation: hero-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes hero-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-cursor {
+  color: #ef4444;
+  animation: hero-blink 1s step-end infinite;
+}
+@keyframes hero-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .header-apple {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
