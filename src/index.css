@@ -139,16 +139,13 @@ body {
   50% { opacity: 0; }
 }
 
-/* ===== HEADER GLASS ===== */
+/* ===== HEADER SOLID ===== */
 .header-apple {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--card-bg);
   color: var(--text-main);
   border-bottom: 1px solid var(--glass-border-bottom);
-  box-shadow: var(--glass-shadow);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  transition: background 0.3s ease;
 }
 
 /* ===== HERO CARD GLASS (saat tool active) ===== */
@@ -168,21 +165,11 @@ body {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
   transition: none !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  background: var(--glass-bg) !important;
+  background: var(--card-bg) !important;
   border-radius: 1.5rem !important;
-  border: 1px solid var(--glass-border) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),   /* light mode: inner top highlight */
-    var(--glass-shadow) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--card-shadow) !important;
   margin: 0 0.5rem;
-}
-
-.dark #main-container.tool-active .hero-card {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),  /* dark mode: subtle inner highlight */
-    var(--glass-shadow) !important;
 }
 
 /* ===== BASE HERO CARD ===== */
