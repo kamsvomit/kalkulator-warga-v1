@@ -158,7 +158,8 @@ body {
   border-bottom: 1px solid var(--glass-border-bottom);
   box-shadow: var(--glass-shadow);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
+  /* will-change: transform removed — breaks backdrop-filter */
+  transform: translateZ(0);
 }
 
 /* ===== HERO CARD GLASS (saat tool active) ===== */
@@ -171,7 +172,7 @@ body {
   top: 3.5rem !important;
   z-index: 90;
   margin: 0.5rem 0 !important;
-  will-change: transform;
+  /* will-change: transform removed — breaks backdrop-filter on children */
 }
 
 #main-container.tool-active .hero-card {
