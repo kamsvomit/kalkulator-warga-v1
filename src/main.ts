@@ -42,14 +42,6 @@ async function init() {
 
   renderHome();
   
-  // Clock Update
-  setInterval(() => {
-    const headerTime = document.getElementById('header-time');
-    if (headerTime) {
-      const now = new Date();
-      headerTime.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
-    }
-  }, 1000);
   
   // Setup global sound listener for results
   const observer = new MutationObserver((mutations) => {
@@ -205,9 +197,6 @@ function renderHome() {
     tools: normalizedCalculators.filter(c => c.category === cat).sort((a, b) => a.name.localeCompare(b.name))
   }));
 
-  const now = new Date();
-  const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
   app.innerHTML = `
     <div class="min-h-screen flex flex-col bg-arsenic/[0.02] selection:bg-red-500/30">
       <!-- Apple Style Sticky Header -->
@@ -248,22 +237,127 @@ function renderHome() {
         <!-- Hero Section (Sticky when tool open) -->
         <div id="hero-section">
           <div id="hero-content" class="hero-card animate-fade-in">
-            <div id="copywriting-view" class="space-y-8">
-              <div class="pb-6 border-b border-arsenic/5">
-                <div class="flex flex-col">
-                  <span id="header-time" class="text-6xl font-black tracking-tighter text-arsenic leading-none">00:00</span>
-                  <span class="text-xs font-black text-red-600 uppercase tracking-[0.2em] mt-3">${dateStr}</span>
-                </div>
+            <div id="copywriting-view" class="space-y-6">
+              <style>
+                @keyframes hero-float {
+                  0%, 100% { transform: translateY(0px); }
+                  50% { transform: translateY(-6px); }
+                }
+                @keyframes hero-pulse-glow {
+                  0%, 100% { opacity: 0.5; transform: scale(1); }
+                  50% { opacity: 1; transform: scale(1.08); }
+                }
+                @keyframes hero-slide-up {
+                  from { opacity: 0; transform: translateY(22px); }
+                  to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes hero-badge-pop {
+                  0% { opacity: 0; transform: scale(0.7) translateY(8px); }
+                  70% { transform: scale(1.07) translateY(-2px); }
+                  100% { opacity: 1; transform: scale(1) translateY(0); }
+                }
+                @keyframes hero-shimmer {
+                  0% { background-position: -200% center; }
+                  100% { background-position: 200% center; }
+                }
+                @keyframes hero-dot-bounce {
+                  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+                  40% { transform: translateY(-5px); opacity: 1; }
+                }
+                @keyframes hero-line-grow {
+                  from { transform: scaleX(0); }
+                  to { transform: scaleX(1); }
+                }
+                .hero-tag {
+                  animation: hero-badge-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+                }
+                .hero-title-line1 {
+                  animation: hero-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+                }
+                .hero-title-line2 {
+                  animation: hero-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+                }
+                .hero-desc {
+                  animation: hero-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.44s both;
+                }
+                .hero-stats {
+                  animation: hero-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.56s both;
+                }
+                .hero-shimmer-text {
+                  background: linear-gradient(90deg, #dc2626, #f97316, #dc2626, #f97316);
+                  background-size: 200% auto;
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  animation: hero-shimmer 3s linear infinite;
+                }
+                .hero-dot-1 { animation: hero-dot-bounce 1.4s ease-in-out 0s infinite; }
+                .hero-dot-2 { animation: hero-dot-bounce 1.4s ease-in-out 0.2s infinite; }
+                .hero-dot-3 { animation: hero-dot-bounce 1.4s ease-in-out 0.4s infinite; }
+                .hero-stat-item {
+                  animation: hero-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+                }
+                .hero-stat-item:nth-child(1) { animation-delay: 0.58s; }
+                .hero-stat-item:nth-child(2) { animation-delay: 0.66s; }
+                .hero-stat-item:nth-child(3) { animation-delay: 0.74s; }
+                .hero-divider-line {
+                  transform-origin: left;
+                  animation: hero-line-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+                }
+                .hero-glow-orb {
+                  animation: hero-pulse-glow 4s ease-in-out infinite;
+                }
+              </style>
+
+              <!-- Badge -->
+              <div class="hero-tag inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-100">
+                <span class="flex gap-0.5 items-end">
+                  <span class="hero-dot-1 w-1 h-1 rounded-full bg-red-500 inline-block"></span>
+                  <span class="hero-dot-2 w-1 h-1.5 rounded-full bg-red-400 inline-block"></span>
+                  <span class="hero-dot-3 w-1 h-1 rounded-full bg-red-500 inline-block"></span>
+                </span>
+                <span class="text-[10px] font-black text-red-600 uppercase tracking-widest">Alat Hitung Warga Indonesia</span>
               </div>
-              
-              <div class="max-w-xl">
-                <h2 class="text-3xl font-black text-arsenic mb-3 leading-tight tracking-tight">
-                  Hitung Cepat, <span class="text-red-600">Hidup Lebih Mudah!</span>
+
+              <!-- Headline -->
+              <div class="relative">
+                <!-- subtle glow behind headline -->
+                <div class="hero-glow-orb absolute -top-4 -left-4 w-32 h-32 rounded-full bg-red-500/8 blur-2xl pointer-events-none"></div>
+                
+                <h2 class="relative">
+                  <span class="hero-title-line1 block text-3xl sm:text-4xl font-black text-arsenic leading-tight tracking-tight">
+                    Hitung Cepat,
+                  </span>
+                  <span class="hero-title-line2 block text-3xl sm:text-4xl font-black leading-tight tracking-tight mt-0.5">
+                    <span class="hero-shimmer-text">Hidup Lebih Mudah.</span>
+                  </span>
                 </h2>
-                <p class="text-base text-arsenic/70 font-medium leading-relaxed">
-                  Koleksi alat hitung esensial untuk kebutuhan sehari-hari warga Indonesia. 
-                  Mulai dari finansial, kesehatan, hingga tradisi—semua dalam satu genggaman.
-                </p>
+              </div>
+
+              <!-- Description -->
+              <p class="hero-desc text-sm text-arsenic/65 font-medium leading-relaxed max-w-sm">
+                Koleksi alat hitung esensial untuk kebutuhan sehari-hari—dari finansial, kesehatan, hingga tradisi. Semua gratis, cepat, tanpa iklan.
+              </p>
+
+              <!-- Divider -->
+              <div class="hero-divider-line h-px bg-gradient-to-r from-red-200 via-arsenic/10 to-transparent"></div>
+
+              <!-- Stats Row -->
+              <div class="hero-stats flex items-center gap-5 flex-wrap">
+                <div class="hero-stat-item flex flex-col">
+                  <span class="text-xl font-black text-arsenic tracking-tight">${calculators.length}<span class="text-red-500">+</span></span>
+                  <span class="text-[9px] font-bold text-arsenic/50 uppercase tracking-wider mt-0.5">Kalkulator</span>
+                </div>
+                <div class="w-px h-8 bg-arsenic/10"></div>
+                <div class="hero-stat-item flex flex-col">
+                  <span class="text-xl font-black text-arsenic tracking-tight">100<span class="text-red-500">%</span></span>
+                  <span class="text-[9px] font-bold text-arsenic/50 uppercase tracking-wider mt-0.5">Gratis</span>
+                </div>
+                <div class="w-px h-8 bg-arsenic/10"></div>
+                <div class="hero-stat-item flex flex-col">
+                  <span class="text-xl font-black text-arsenic tracking-tight">0<span class="text-red-500">ms</span></span>
+                  <span class="text-[9px] font-bold text-arsenic/50 uppercase tracking-wider mt-0.5">Tanpa Login</span>
+                </div>
               </div>
             </div>
             
