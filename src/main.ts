@@ -308,7 +308,7 @@ function renderHome() {
                   <span class="hero-dot-2 w-1 h-1.5 rounded-full bg-red-400 inline-block"></span>
                   <span class="hero-dot-3 w-1 h-1 rounded-full bg-red-500 inline-block"></span>
                 </span>
-                <span class="text-[10px] font-black text-red-600 uppercase tracking-widest">Alat Hitung Warga Indonesia</span>
+                <span class="text-[10px] font-black text-red-600 uppercase tracking-widest">Gratis Selamanya. Tanpa Daftar.</span>
               </div>
 
               <!-- Headline -->
@@ -450,9 +450,8 @@ function renderHome() {
         </div>
 
         <footer class="py-12 text-center border-t border-arsenic/10">
-          <p class="text-[10px] text-arsenic font-black uppercase tracking-[0.3em]">
-            Digital Assistant v2.1 • 2026
-          </p>
+          <p class="text-sm font-black text-arsenic tracking-tight">Kalkulator Warga</p>
+          <p class="text-[10px] text-arsenic/40 font-medium mt-1 tracking-widest uppercase">Dibuat untuk rakyat &copy; 2026</p>
         </footer>
       </main>
 
